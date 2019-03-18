@@ -46,18 +46,18 @@ updateprime() {
   echo "150" > ${abc}/pg.preinstall
   echo "22" > ${abc}/pg.folders
   echo "15" > ${abc}/pg.dockerinstall
-  echo "15" > ${abc}/pg.server
-  echo "1" > ${abc}/pg.serverid
+  echo "16" > ${abc}/pg.server
+  echo "2" > ${abc}/pg.serverid
   echo "32" > ${abc}/pg.dependency
   echo "11" > ${abc}/pg.docstart
   echo "2" > ${abc}/pg.motd
   echo "113" > ${abc}/pg.alias
   echo "3" > ${abc}/pg.dep
   echo "2" > ${abc}/pg.cleaner
-  echo "3" > ${abc}/pg.gcloud
-  echo "12" > ${abc}/pg.hetzner
+  echo "4" > ${abc}/pg.gcloud
+  echo "13" > ${abc}/pg.hetzner
   echo "1" > ${abc}/pg.amazonaws
-  echo "8.4" > ${abc}/pg.verionid
+  echo "8.6" > ${abc}/pg.verionid
   echo "11" > ${abc}/pg.watchtower
   echo "1" > ${abc}/pg.installer
   echo "7" > ${abc}/pg.prune
