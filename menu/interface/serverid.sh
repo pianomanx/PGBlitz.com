@@ -5,9 +5,9 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-touch /var/plexguide/server.id.stored
-start=$( cat /var/plexguide/server.id )
-stored=$( cat /var/plexguide/server.id.stored )
+touch /var/pgblitz/server.id.stored
+start=$( cat /var/pgblitz/server.id )
+stored=$( cat /var/pgblitz/server.id.stored )
 
 if [ "$start" != "$stored" ]; then
 
@@ -31,7 +31,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
-bash /opt/plexguide/menu/interface/serverid.sh
+bash /opt/pgblitz/menu/interface/serverid.sh
 exit
 else
 tee <<-EOF
@@ -42,8 +42,8 @@ tee <<-EOF
 EOF
 
 # Prevents From Repeating
-echo "$typed" > /var/plexguide/server.id
-cat /var/plexguide/server.id > /var/plexguide/server.id.stored
+echo "$typed" > /var/pgblitz/server.id
+cat /var/pgblitz/server.id > /var/pgblitz/server.id.stored
 
 sleep 3
 fi

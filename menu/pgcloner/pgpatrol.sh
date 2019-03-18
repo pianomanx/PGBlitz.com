@@ -7,16 +7,16 @@
 ################################################################################
 
 ### FILL OUT THIS AREA ###
-echo 'pgpatrol' > /var/plexguide/pgcloner.rolename
-echo 'PGPatrol' > /var/plexguide/pgcloner.roleproper
-echo 'PGPatrol' > /var/plexguide/pgcloner.projectname
-echo 'v8.5' > /var/plexguide/pgcloner.projectversion
-echo 'v8.5' > /var/plexguide/pgcloner.projectversion
+echo 'pgpatrol' > /var/pgblitz/pgcloner.rolename
+echo 'PGPatrol' > /var/pgblitz/pgcloner.roleproper
+echo 'PGPatrol' > /var/pgblitz/pgcloner.projectname
+echo 'v8.5' > /var/pgblitz/pgcloner.projectversion
+echo 'v8.5' > /var/pgblitz/pgcloner.projectversion
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 echo "💬 PG Patrol can boot idle plex users, users utilizing multiple
-ips (sharing the server), and much more!" > /var/plexguide/pgcloner.info
+ips (sharing the server), and much more!" > /var/pgblitz/pgcloner.info
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ### START PROCESS
-bash /opt/plexguide/menu/pgcloner/corev2/main.sh
+bash /opt/pgblitz/menu/pgcloner/corev2/main.sh

@@ -14,7 +14,7 @@ sed -i -e "/traefik/d" /tmp/backup.list
 sed -i -e "/watchtower/d" /tmp/backup.list
 sed -i -e "/wp-*/d" /tmp/backup.list
 sed -i -e "/x2go*/d" /tmp/backup.list
-sed -i -e "/plexguide/d" /tmp/backup.list
+sed -i -e "/pgblitz/d" /tmp/backup.list
 sed -i -e "/cloudplow/d" /tmp/backup.list
 sed -i -e "/phlex/d" /tmp/backup.list
 
@@ -71,7 +71,7 @@ if [ "$tcheck" == "" ]; then
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
-bash /opt/plexguide/menu/removal/removal.sh
+bash /opt/pgblitz/menu/removal/removal.sh
 exit
 fi
 
@@ -119,7 +119,7 @@ file="/opt/coreapps/apps/$typed.yml"
 if [ -e "$file" ]; then
   check=$(cat /opt/coreapps/apps/$typed.yml | grep '##PG-Community')
     if [ "$check" == "##PG-Community" ]; then rm -r /opt/communityapps/apps/$typed.yml; fi
-rm -rf /var/plexguide/community.app
+rm -rf /var/pgblitz/community.app
 fi
 
 sleep 1.5

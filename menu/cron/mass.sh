@@ -7,38 +7,38 @@
 #################################################################################
 
 # KEY VARIABLE RECALL & EXECUTION
-mkdir -p /var/plexguide/cron/
-mkdir -p /opt/appdata/plexguide/cron
+mkdir -p /var/pgblitz/cron/
+mkdir -p /opt/appdata/pgblitz/cron
 # FUNCTIONS START ##############################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 
 weekrandom () {
   while read p; do
   echo "$p" > /tmp/program_var
-  echo $(($RANDOM % 23)) > /var/plexguide/cron/cron.hour
-  echo $(($RANDOM % 59)) > /var/plexguide/cron/cron.minute
-  echo $(($RANDOM % 6))> /var/plexguide/cron/cron.day
-  ansible-playbook /opt/plexguide/menu/cron/cron.yml
-  done </var/plexguide/pgbox.buildup
+  echo $(($RANDOM % 23)) > /var/pgblitz/cron/cron.hour
+  echo $(($RANDOM % 59)) > /var/pgblitz/cron/cron.minute
+  echo $(($RANDOM % 6))> /var/pgblitz/cron/cron.day
+  ansible-playbook /opt/pgblitz/menu/cron/cron.yml
+  done </var/pgblitz/pgbox.buildup
   exit
 }
 
 dailyrandom () {
   while read p; do
   echo "$p" > /tmp/program_var
-  echo $(($RANDOM % 23)) > /var/plexguide/cron/cron.hour
-  echo $(($RANDOM % 59)) > /var/plexguide/cron/cron.minute
-  echo "*/1" > /var/plexguide/cron/cron.day
-  ansible-playbook /opt/plexguide/menu/cron/cron.yml
-  done </var/plexguide/pgbox.buildup
+  echo $(($RANDOM % 23)) > /var/pgblitz/cron/cron.hour
+  echo $(($RANDOM % 59)) > /var/pgblitz/cron/cron.minute
+  echo "*/1" > /var/pgblitz/cron/cron.day
+  ansible-playbook /opt/pgblitz/menu/cron/cron.yml
+  done </var/pgblitz/pgbox.buildup
   exit
 }
 
 manualuser () {
   while read p; do
   echo "$p" > /tmp/program_var
-  bash /opt/plexguide/menu/cron/cron.sh
-  done </var/plexguide/pgbox.buildup
+  bash /opt/pgblitz/menu/cron/cron.sh
+  done </var/pgblitz/pgbox.buildup
   exit
 }
 
@@ -62,9 +62,9 @@ EOF
 
   read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
   if [ "$typed" == "1" ]; then exit;
-elif [ "$typed" == "2" ]; then manualuser && ansible-playbook /opt/plexguide/menu/cron/cron.yml;
-elif [ "$typed" == "3" ]; then dailyrandom && ansible-playbook /opt/plexguide/menu/cron/cron.yml;
-elif [ "$typed" == "4" ]; then weekrandom && ansible-playbook /opt/plexguide/menu/cron/cron.yml;
+elif [ "$typed" == "2" ]; then manualuser && ansible-playbook /opt/pgblitz/menu/cron/cron.yml;
+elif [ "$typed" == "3" ]; then dailyrandom && ansible-playbook /opt/pgblitz/menu/cron/cron.yml;
+elif [ "$typed" == "4" ]; then weekrandom && ansible-playbook /opt/pgblitz/menu/cron/cron.yml;
 else badinput1; fi
 }
 

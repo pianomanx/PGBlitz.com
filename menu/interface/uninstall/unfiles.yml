@@ -7,8 +7,8 @@
         state: absent
         path: "{{ item }}"
       with_items:
-          - /var/plexguide
-          - /opt/appdata/plexguide
+          - /var/pgblitz
+          - /opt/appdata/pgblitz
           - {{path.stdout}}/nzbget
           - {{path.stdout}}/sab
           - {{path.stdout}}/rutorrent

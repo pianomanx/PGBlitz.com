@@ -7,16 +7,16 @@
 ################################################################################
 
 ### FILL OUT THIS AREA ###
-echo 'pgshield' > /var/plexguide/pgcloner.rolename
-echo 'PGShield' > /var/plexguide/pgcloner.roleproper
-echo 'PGShield' > /var/plexguide/pgcloner.projectname
-echo 'v8.5.6' > /var/plexguide/pgcloner.projectversion
-echo 'pgshield.sh' > /var/plexguide/pgcloner.startlink
+echo 'pgshield' > /var/pgblitz/pgcloner.rolename
+echo 'PGShield' > /var/pgblitz/pgcloner.roleproper
+echo 'PGShield' > /var/pgblitz/pgcloner.projectname
+echo 'v8.5.6' > /var/pgblitz/pgcloner.projectversion
+echo 'pgshield.sh' > /var/pgblitz/pgcloner.startlink
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 echo "💬 PG Shield protects users by deploying adding Google
-Authentication to all the containers for protection!" > /var/plexguide/pgcloner.info
+Authentication to all the containers for protection!" > /var/pgblitz/pgcloner.info
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ### START PROCESS
-bash /opt/plexguide/menu/pgcloner/corev2/main.sh
+bash /opt/pgblitz/menu/pgcloner/corev2/main.sh

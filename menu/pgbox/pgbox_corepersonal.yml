@@ -4,11 +4,11 @@
   tasks:
 
     - name: Register User
-      shell: 'cat /var/plexguide/boxcore.user'
+      shell: 'cat /var/pgblitz/boxcore.user'
       register: boxuser
 
     - name: Register Branch
-      shell: 'cat /var/plexguide/boxcore.branch'
+      shell: 'cat /var/pgblitz/boxcore.branch'
       register: boxbranch
 
     - name: 'Cloning {{boxuser.stdout}} Core Apps'

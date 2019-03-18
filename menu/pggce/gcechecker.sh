@@ -6,7 +6,7 @@
 # GNU:        General Public License v3.0
 ################################################################################
 file1="/dev/nvme0n1"
-file2="/var/plexguide/gce.check"
+file2="/var/pgblitz/gce.check"
 gcheck=$(dnsdomainname | tail -c 10)
   if [ -e "$file1" ] && [ ! -e "$file2" ] && [ "$gcheck" == ".internal" ]; then
 
@@ -34,12 +34,12 @@ EOF
       chmod a+w /nvme1 1>/dev/null 2>&1
       echo UUID=`blkid | grep nvme0n1 | cut -f2 -d'"'` /nvme1 ext4 discard,defaults,nobarrier,nofail 0 2 | tee -a /etc/fstab
 
-      touch /var/plexguide/gce.check
-      rm -rf /var/plexguide/gce.failed 1>/dev/null 2>&1
-      rm -rf /var/plexguide/gce.false 1>/dev/null 2>&1
+      touch /var/pgblitz/gce.check
+      rm -rf /var/pgblitz/gce.failed 1>/dev/null 2>&1
+      rm -rf /var/pgblitz/gce.false 1>/dev/null 2>&1
 
-      echo "feeder" > /var/plexguide/pg.server.deploy
-      cat /var/plexguide/pg.edition > /var/plexguide/pg.edition.stored
+      echo "feeder" > /var/pgblitz/pg.server.deploy
+      cat /var/pgblitz/pg.edition > /var/pgblitz/pg.edition.stored
 
 tee <<-EOF
 
@@ -72,8 +72,8 @@ tee <<-EOF
 
 EOF
 read -p 'Press [ENTER] to Continue! ' typed < /dev/tty
-rm -rf /var/plexguide/gce.failed 1>/dev/null 2>&1
-rm -rf /var/plexguide/gce.false 1>/dev/null 2>&1
+rm -rf /var/pgblitz/gce.failed 1>/dev/null 2>&1
+rm -rf /var/pgblitz/gce.false 1>/dev/null 2>&1
 else
-    touch /var/plexguide/gce.false
+    touch /var/pgblitz/gce.false
 fi

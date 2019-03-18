@@ -17,7 +17,7 @@ exit 1
 fi
 
 ### Execut YML
-ansible-playbook /opt/plexguide/menu/pgfork/main.yml
+ansible-playbook /opt/pgblitz/menu/pgfork/main.yml
 
 tee <<-EOF
 
@@ -26,6 +26,6 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 1.5
-file="/var/plexguide/community.app"
-if [ -e "$file" ]; then rm -rf /var/plexguide/community.app; fi
-bash /opt/plexguide/menu/interface/ending.sh
+file="/var/pgblitz/community.app"
+if [ -e "$file" ]; then rm -rf /var/pgblitz/community.app; fi
+bash /opt/pgblitz/menu/interface/ending.sh

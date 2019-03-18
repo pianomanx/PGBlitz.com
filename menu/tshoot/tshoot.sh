@@ -32,16 +32,16 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
-    echo "0" > /var/plexguide/pg.preinstall.stored
-    echo "0" > /var/plexguide/pg.ansible.stored
-    echo "0" > /var/plexguide/pg.rclone.stored
-    echo "0" > /var/plexguide/pg.python.stored
-    echo "0" > /var/plexguide/pg.docker.stored
-    echo "0" > /var/plexguide/pg.docstart.stored
-    echo "0" > /var/plexguide/pg.watchtower.stored
-    echo "0" > /var/plexguide/pg.label.stored
-    echo "0" > /var/plexguide/pg.alias.stored
-    echo "0" > /var/plexguide/pg.dep.stored
+    echo "0" > /var/pgblitz/pg.preinstall.stored
+    echo "0" > /var/pgblitz/pg.ansible.stored
+    echo "0" > /var/pgblitz/pg.rclone.stored
+    echo "0" > /var/pgblitz/pg.python.stored
+    echo "0" > /var/pgblitz/pg.docker.stored
+    echo "0" > /var/pgblitz/pg.docstart.stored
+    echo "0" > /var/pgblitz/pg.watchtower.stored
+    echo "0" > /var/pgblitz/pg.label.stored
+    echo "0" > /var/pgblitz/pg.alias.stored
+    echo "0" > /var/pgblitz/pg.dep.stored
 
 tee <<-EOF
 
@@ -63,16 +63,16 @@ sleep 3
   rm -rf /etc/docker
   apt-get purge docker-ce
   rm -rf /var/lib/docker
-  rm -rf /var/plexguide/dep*
-  echo "0" > /var/plexguide/pg.preinstall.stored
-  echo "0" > /var/plexguide/pg.ansible.stored
-  echo "0" > /var/plexguide/pg.rclone.stored
-  echo "0" > /var/plexguide/pg.python.stored
-  echo "0" > /var/plexguide/pg.docstart.stored
-  echo "0" > /var/plexguide/pg.watchtower.stored
-  echo "0" > /var/plexguide/pg.label.stored
-  echo "0" > /var/plexguide/pg.alias.stored
-  echo "0" > /var/plexguide/pg.dep
+  rm -rf /var/pgblitz/dep*
+  echo "0" > /var/pgblitz/pg.preinstall.stored
+  echo "0" > /var/pgblitz/pg.ansible.stored
+  echo "0" > /var/pgblitz/pg.rclone.stored
+  echo "0" > /var/pgblitz/pg.python.stored
+  echo "0" > /var/pgblitz/pg.docstart.stored
+  echo "0" > /var/pgblitz/pg.watchtower.stored
+  echo "0" > /var/pgblitz/pg.label.stored
+  echo "0" > /var/pgblitz/pg.alias.stored
+  echo "0" > /var/pgblitz/pg.dep
 
 tee <<-EOF
 
@@ -90,13 +90,13 @@ tee <<-EOF
 EOF
 sleep 3
 
-  echo "uninstall" > /var/plexguide/type.choice && bash /opt/plexguide/menu/core/scripts/main.sh
+  echo "uninstall" > /var/pgblitz/type.choice && bash /opt/pgblitz/menu/core/scripts/main.sh
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
   exit
 else
-  bash /opt/plexguide/menu/tshoot/tshoot.sh
+  bash /opt/pgblitz/menu/tshoot/tshoot.sh
   exit
 fi
 
-bash /opt/plexguide/menu/tshoot/tshoot.sh
+bash /opt/pgblitz/menu/tshoot/tshoot.sh
 exit

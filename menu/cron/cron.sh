@@ -8,10 +8,10 @@
 
 # KEY VARIABLE RECALL & EXECUTION
 program=$(cat /tmp/program_var)
-mkdir -p /var/plexguide/cron/
-mkdir -p /opt/appdata/plexguide/cron
+mkdir -p /var/pgblitz/cron/
+mkdir -p /opt/appdata/pgblitz/cron
 # FUNCTIONS START ##############################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 
 # FIRST QUESTION
 question1 () {
@@ -29,7 +29,7 @@ tee <<-EOF
 EOF
 
   read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
-  if [ "$typed" == "1" ]; then ansible-playbook /opt/plexguide/menu/cron/remove.yml && exit;
+  if [ "$typed" == "1" ]; then ansible-playbook /opt/pgblitz/menu/cron/remove.yml && exit;
 elif [ "$typed" == "2" ]; then break="on";
 else badinput; fi
 }
@@ -58,8 +58,8 @@ DAILY
 EOF
 
   read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "0" && "$typed" -le "7" ]]; then echo $typed > /var/plexguide/cron/cron.day && break=1;
-elif [ "$typed" == "8" ]; then echo "*/1" > /var/plexguide/cron/$program.cron.day && break=1;
+  if [[ "$typed" -ge "0" && "$typed" -le "7" ]]; then echo $typed > /var/pgblitz/cron/cron.day && break=1;
+elif [ "$typed" == "8" ]; then echo "*/1" > /var/pgblitz/cron/$program.cron.day && break=1;
 else badinput; fi
 }
 
@@ -81,7 +81,7 @@ Type an HOUR from [0 to 23]
 EOF
 
   read -p '↘️  Type a Number | Press [ENTER]: ' typed < /dev/tty
-  if [[ "$typed" -ge "0" && "$typed" -le "23" ]]; then echo $typed > /var/plexguide/cron/cron.hour && break=1;
+  if [[ "$typed" -ge "0" && "$typed" -le "23" ]]; then echo $typed > /var/pgblitz/cron/cron.hour && break=1;
 else badinput; fi
 }
 
@@ -91,5 +91,5 @@ break=off && while [ "$break" == "off" ]; do question1; done
 break=off && while [ "$break" == "off" ]; do question2; done
 break=off && while [ "$break" == "off" ]; do question3; done
 
-echo $(($RANDOM % 59)) > /var/plexguide/cron/cron.minute
-ansible-playbook /opt/plexguide/menu/cron/cron.yml
+echo $(($RANDOM % 59)) > /var/pgblitz/cron/cron.minute
+ansible-playbook /opt/pgblitz/menu/cron/cron.yml

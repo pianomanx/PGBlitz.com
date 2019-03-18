@@ -5,9 +5,9 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-echo 2 > /var/plexguide/menu.number
+echo 2 > /var/pgblitz/menu.number
 
-file="/var/plexguide/server.id"
+file="/var/pgblitz/server.id"
   if [ ! -e "$file" ]; then
-    echo NOT-SET > /var/plexguide/server.id
+    echo NOT-SET > /var/pgblitz/server.id
   fi

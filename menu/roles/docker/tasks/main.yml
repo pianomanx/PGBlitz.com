@@ -154,9 +154,9 @@
   tags: docker_standard
   when: switch == "on"
 
-- name: create plexguide network
+- name: create pgblitz network
   docker_network:
-    name: "plexguide"
+    name: "pgblitz"
     state: present
   tags: docker_standard
   when: switch == "on"

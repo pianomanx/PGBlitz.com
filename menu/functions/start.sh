@@ -5,8 +5,8 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
-source /opt/plexguide/menu/functions/install.sh
+source /opt/pgblitz/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/install.sh
 
 sudocheck() {
 if [[ $EUID -ne 0 ]]; then
@@ -22,18 +22,18 @@ fi
 }
 
 downloadpg() {
-  rm -rf /opt/plexguide
-  git clone https://github.com/PGBlitz/PGBlitz.com.git /opt/plexguide && cp /opt/plexguide/menu/interface/alias/templates/plexguide /bin/
-  cp /opt/plexguide/menu/interface/alias/templates/plexguide /bin/plexguide
+  rm -rf /opt/pgblitz
+  git clone https://github.com/PGBlitz/PGBlitz.com.git /opt/pgblitz && cp /opt/pgblitz/menu/interface/alias/templates/pgblitz /bin/
+  cp /opt/pgblitz/menu/interface/alias/templates/pgblitz /bin/pgblitz
 }
 
 missingpull() {
-file="/opt/plexguide/menu/functions/install.sh"
+file="/opt/pgblitz/menu/functions/install.sh"
 if [ ! -e "$file" ]; then
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⛔️  /opt/plexguide went missing!
+⛔️  /opt/pgblitz went missing!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
@@ -58,13 +58,13 @@ EOF
 }
 
 exitcheck() {
-bash /opt/plexguide/menu/version/file.sh
-file="/var/plexguide/exited.upgrade"
+bash /opt/pgblitz/menu/version/file.sh
+file="/var/pgblitz/exited.upgrade"
 if [ ! -e "$file" ]; then
-	bash /opt/plexguide/menu/interface/ending.sh
+	bash /opt/pgblitz/menu/interface/ending.sh
 else
-	rm -rf /var/plexguide/exited.upgrade 1>/dev/null 2>&1
+	rm -rf /var/pgblitz/exited.upgrade 1>/dev/null 2>&1
 	echo ""
-	bash /opt/plexguide/menu/interface/ending.sh
+	bash /opt/pgblitz/menu/interface/ending.sh
 fi
 }

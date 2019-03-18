@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-menu=$(cat /var/plexguide/final.choice)
+menu=$(cat /var/pgblitz/final.choice)
 
 if [ "$menu" == "2" ]; then
   ########## Server Must Not Be Deployed - START
@@ -28,7 +28,7 @@ if [ "$menu" == "2" ]; then
   ########## Server Must Not Be Deployed - END
 
   gcloud auth login
-  echo "[NOT SET]" > /var/plexguide/project.final
+  echo "[NOT SET]" > /var/pgblitz/project.final
 fi
 
 if [ "$menu" == "3" ]; then
@@ -110,7 +110,7 @@ if [ "$menu" == "4" ]; then
   fi
   ########## Server Must Not Be Deployed - END
 
-  gcloud projects list && gcloud projects list > /var/plexguide/projects.list
+  gcloud projects list && gcloud projects list > /var/pgblitz/projects.list
   echo ""
   echo "------------------------------------------------------------------------------"
   echo "SYSTEM MESSAGE: GCloud Project Interface"
@@ -141,12 +141,12 @@ if [ "$menu" == "4" ]; then
     echo "SYSTEM MESSAGE: Project Selection Interface"
     echo "------------------------------------------------------------------------------"
     echo ""
-    cat /var/plexguide/projects.list | cut -d' ' -f1 | tail -n +2
-    cat /var/plexguide/projects.list | cut -d' ' -f1 | tail -n +2 > /var/plexguide/project.cut
+    cat /var/pgblitz/projects.list | cut -d' ' -f1 | tail -n +2
+    cat /var/pgblitz/projects.list | cut -d' ' -f1 | tail -n +2 > /var/pgblitz/project.cut
     echo ""
     echo "NOTE: Type the Name of the Project you want to utilize!"
     read -p 'Type the Name of the Project to Utlize & Press [ENTER]: ' typed
-    list=$(cat /var/plexguide/project.cut | grep $typed)
+    list=$(cat /var/pgblitz/project.cut | grep $typed)
     echo ""
 
     if [ "$typed" != "$list" ]; then
@@ -185,8 +185,8 @@ if [ "$menu" == "4" ]; then
     fi
   done
 
-  echo $typed > /var/plexguide/project.final
-  echo 'INFO - Selected: Exiting Application Suite Interface' > /var/plexguide/logs/pg.log && bash /opt/plexguide/menu/log/log.sh
+  echo $typed > /var/pgblitz/project.final
+  echo 'INFO - Selected: Exiting Application Suite Interface' > /var/pgblitz/logs/pg.log && bash /opt/pgblitz/menu/log/log.sh
   exit
 fi
 
@@ -207,7 +207,7 @@ if [ "$menu" == "5" ]; then
   fi
   ############################## BILLING CHECKS - END
   ############################## PROJECT BILLING CHECKS - START
-  project=$(cat /var/plexguide/project.final)
+  project=$(cat /var/pgblitz/project.final)
   projectlink=$(gcloud beta billing accounts list | grep "\<True\>" | awk '{ print $1 }')
   billingcheck=$(gcloud beta billing projects link $project --billing-account $projectlink | grep "billingEnabled: true")
   if [ "$billingcheck" == "" ]; then
@@ -248,7 +248,7 @@ if [ "$menu" == "5" ]; then
   ########## Server Must Not Be Deployed - END
 
   ### Part 1
-  pcount=$(cat /var/plexguide/project.processor)
+  pcount=$(cat /var/pgblitz/project.processor)
   echo ""
   echo "--------------------------------------------------------"
   echo "SYSTEM MESSAGE: Current Processor Count Interface"
@@ -304,7 +304,7 @@ if [ "$menu" == "5" ]; then
       echo "SYSTEM MESSAGE: Passed! Process Count $typed Set"
       echo "----------------------------------------------"
       echo ""
-      echo $typed > /var/plexguide/project.processor
+      echo $typed > /var/pgblitz/project.processor
       read -n 1 -s -r -p "Press [ANY KEY] to Continue "
       break=on
     fi
@@ -330,7 +330,7 @@ if [ "$menu" == "6" ]; then
   fi
   ############################## BILLING CHECKS - END
   ############################## PROJECT BILLING CHECKS - START
-  project=$(cat /var/plexguide/project.final)
+  project=$(cat /var/pgblitz/project.final)
   projectlink=$(gcloud beta billing accounts list | grep "\<True\>" | awk '{ print $1 }')
   billingcheck=$(gcloud beta billing projects link $project --billing-account $projectlink | grep "billingEnabled: true")
   if [ "$billingcheck" == "" ]; then
@@ -386,7 +386,7 @@ while read p; do
 done </tmp/regions.list
 
 ### Part 2
-#gcloud compute regions list | awk '{print $1}' | tail -n +2 > /var/plexguide/project.region
+#gcloud compute regions list | awk '{print $1}' | tail -n +2 > /var/pgblitz/project.region
 
 typed=nullstart
 prange=$(cat /tmp/regions.print)
@@ -416,7 +416,7 @@ while [ "$break" == "off" ]; do
     echo "SYSTEM MESSAGE: Passed! IP Region $typed Set"
     echo "--------------------------------------------------------"
     echo ""
-    echo $typed > /var/plexguide/project.ipregion
+    echo $typed > /var/pgblitz/project.ipregion
     read -n 1 -s -r -p "Press [ANY KEY] to Continue "
     echo ""
     echo ""
@@ -456,11 +456,11 @@ echo "--------------------------------------------------------"
 echo ""
 echo "NOTE: Please Standby"
 echo ""
-projectname=$(cat /var/plexguide/project.final)
-region=$(cat /var/plexguide/project.ipregion)
+projectname=$(cat /var/pgblitz/project.final)
+region=$(cat /var/pgblitz/project.ipregion)
 gcloud compute addresses create pg-gce --region $region --project $projectname
-gcloud compute addresses list | grep pg-gce | awk '{print $3}' > /var/plexguide/project.ipaddress
-ipaddress=$(cat /var/plexguide/project.ipaddress)
+gcloud compute addresses list | grep pg-gce | awk '{print $3}' > /var/pgblitz/project.ipaddress
+ipaddress=$(cat /var/pgblitz/project.ipaddress)
 sleep 1.5
 echo "" & echo ""
 echo "--------------------------------------------------------"
@@ -491,7 +491,7 @@ inslist=$(gcloud compute instances list | grep pg-gce)
 ########## Server Must Not Be Deployed - END
 
 ### Part 1
-ipregion=$(cat /var/plexguide/project.ipregion)
+ipregion=$(cat /var/pgblitz/project.ipregion)
 gcloud compute zones list | awk '{print $1}' | tail -n +2 | grep $ipregion > /tmp/zones.list
 num=0
 echo " " > /tmp/zones.print
@@ -537,7 +537,7 @@ break=off
       echo "SYSTEM MESSAGE: Passed! Location $typed Set"
       echo "----------------------------------------------"
       echo ""
-      echo $typed > /var/plexguide/project.location
+      echo $typed > /var/pgblitz/project.location
       read -n 1 -s -r -p "Press [ANY KEY] to Continue "
       break=on
     fi
@@ -565,7 +565,7 @@ if [ "$menu" == "7" ]; then
   fi
   ############################## BILLING CHECKS - END
   ############################## PROJECT BILLING CHECKS - START
-  project=$(cat /var/plexguide/project.final)
+  project=$(cat /var/pgblitz/project.final)
   projectlink=$(gcloud beta billing accounts list | grep "\<True\>" | awk '{ print $1 }')
   billingcheck=$(gcloud beta billing projects link $project --billing-account $projectlink | grep "billingEnabled: true")
   if [ "$billingcheck" == "" ]; then
@@ -592,11 +592,11 @@ if [ "$menu" == "7" ]; then
   echo "--------------------------------------------------------"
   echo ""
   ##########
-  project=$(cat /var/plexguide/project.final)
-  ipaddress=$(cat /var/plexguide/project.ipaddress)
-  location=$(cat /var/plexguide/project.location)
-  region=$(cat /var/plexguide/project.ipregion)
-  cpu=$(cat /var/plexguide/project.processor)
+  project=$(cat /var/pgblitz/project.final)
+  ipaddress=$(cat /var/pgblitz/project.ipaddress)
+  location=$(cat /var/pgblitz/project.location)
+  region=$(cat /var/pgblitz/project.ipregion)
+  cpu=$(cat /var/pgblitz/project.processor)
 
   inslist=$(gcloud compute instances list | grep pg-gce)
   if [ "$inslist" != "" ]; then
@@ -618,7 +618,7 @@ echo "SYSTEM MESSAGE: Checking PG GCE Firewall Rules"
 echo "--------------------------------------------------------"
 echo ""
 
-inslist=$(gcloud compute firewall-rules list | grep plexguide)
+inslist=$(gcloud compute firewall-rules list | grep pgblitz)
 if [ "$inslist" == "" ]; then
 echo "--------------------------------------------------------"
 echo "SYSTEM MESSAGE: FireWall Rules Do Not Exist!"
@@ -626,7 +626,7 @@ echo "--------------------------------------------------------"
 echo ""
 echo "NOTE: Building Firewall Rules! Please Wait"
 echo ""
-gcloud compute firewall-rules create plexguide --allow all
+gcloud compute firewall-rules create pgblitz --allow all
 echo ""
 read -n 1 -s -r -p "Press [ANY KEY] to Continue "
 fi
@@ -695,7 +695,7 @@ finalchecks=$(gcloud compute instances list | grep pg-gce)
     echo "--------------------------------------------------------"
     echo ""
     read -n 1 -s -r -p "Press [ANY KEY] to Continue "
-    touch /var/plexguide/gce.deployed
+    touch /var/pgblitz/gce.deployed
   else
     echo "--------------------------------------------------------"
     echo "SYSTEM MESSAGE: Deployment Failed"
@@ -726,7 +726,7 @@ if [ "$menu" == "8" ]; then
   fi
   ############################## BILLING CHECKS - END
   ############################## PROJECT BILLING CHECKS - START
-  project=$(cat /var/plexguide/project.final)
+  project=$(cat /var/pgblitz/project.final)
   projectlink=$(gcloud beta billing accounts list | grep "\<True\>" | awk '{ print $1 }')
   billingcheck=$(gcloud beta billing projects link $project --billing-account $projectlink | grep "billingEnabled: true")
   if [ "$billingcheck" == "" ]; then
@@ -760,7 +760,7 @@ echo ""
 read -n 1 -s -r -p "Press [ANY KEY] to Continue "
 echo ""
 echo ""
-ipproject=$(cat /var/plexguide/project.location)
+ipproject=$(cat /var/pgblitz/project.location)
 gcloud compute ssh pg-gce --zone "$ipproject"
 echo ""
 echo "--------------------------------------------------------"
@@ -789,7 +789,7 @@ if [ "$menu" == "9" ]; then
   fi
   ############################## BILLING CHECKS - END
   ############################## PROJECT BILLING CHECKS - START
-  project=$(cat /var/plexguide/project.final)
+  project=$(cat /var/pgblitz/project.final)
   projectlink=$(gcloud beta billing accounts list | grep "\<True\>" | awk '{ print $1 }')
   billingcheck=$(gcloud beta billing projects link $project --billing-account $projectlink | grep "billingEnabled: true")
   if [ "$billingcheck" == "" ]; then
@@ -814,12 +814,12 @@ if [ "$menu" == "9" ]; then
   echo "SYSTEM MESSAGE: Destroying GCE Server"
   echo "--------------------------------------------------------"
   echo ""
-  location=$(cat /var/plexguide/project.location)
+  location=$(cat /var/pgblitz/project.location)
   echo "NOTE: Please Standby"
   echo ""
   gcloud compute instances delete pg-gce --quiet --zone "$location"
   rm -rf /root/.ssh/google_compute_engine 1>/dev/null 2>&1
-  rm -rf /var/plexguide/gce.deployed 1>/dev/null 2>&1
+  rm -rf /var/pgblitz/gce.deployed 1>/dev/null 2>&1
   echo ""
   echo "--------------------------------------------------------"
   echo "SYSTEM MESSAGE: PG GCE Server Destroyed!"

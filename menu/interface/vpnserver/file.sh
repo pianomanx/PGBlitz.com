@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-menu=$(cat /var/plexguide/final.choice)
+menu=$(cat /var/pgblitz/final.choice)
 
 if [ "$menu" == "2" ]; then
   echo ""
@@ -17,15 +17,15 @@ if [ "$menu" == "2" ]; then
   sleep 2
   echo ""
   wget https://git.io/vpnsetup -O vpnsetup.sh 1>/dev/null 2>&1
-  sudo sh vpnsetup.sh > /opt/appdata/plexguide/vpninfo.raw
-  cat /opt/appdata/plexguide/vpninfo.raw | tail -n -12 | head -n +4 > /opt/appdata/plexguide/vpn.info
-  rm -rf /opt/appdata/plexguide/vpninfo.raw
+  sudo sh vpnsetup.sh > /opt/appdata/pgblitz/vpninfo.raw
+  cat /opt/appdata/pgblitz/vpninfo.raw | tail -n -12 | head -n +4 > /opt/appdata/pgblitz/vpn.info
+  rm -rf /opt/appdata/pgblitz/vpninfo.raw
   echo
   echo "-----------------------------------------------------"
   echo "SYSTEM MESSAGE: Please Copy Your Information"
   echo "-----------------------------------------------------"
   echo ""
-  cat /opt/appdata/plexguide/vpn.info
+  cat /opt/appdata/pgblitz/vpn.info
   echo ""
   echo "Config Info: Visit http://pgvpn.pgblitz.com or WIKI"
   echo "Note: pgvpn <<< command to recall your vpn info"

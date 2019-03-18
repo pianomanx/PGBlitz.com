@@ -43,8 +43,8 @@
 
     - name: PGBlitz
       template:
-        src: plexguide
-        dest: /bin/plexguide
+        src: pgblitz
+        dest: /bin/pgblitz
         force: yes
         mode: 0775
         owner: root

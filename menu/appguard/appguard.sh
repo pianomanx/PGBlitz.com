@@ -8,14 +8,14 @@
 
 # KEY VARIABLE RECALL & EXECUTION
 program=$(cat /tmp/program_var)
-mkdir -p /var/plexguide/cron/
-mkdir -p /opt/appdata/plexguide/cron
+mkdir -p /var/pgblitz/cron/
+mkdir -p /opt/appdata/pgblitz/cron
 # FUNCTIONS START ##############################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 
 # FIRST QUESTION
 question1 () {
-  appguard=$(cat /var/plexguide/server.ht)
+  appguard=$(cat /var/pgblitz/server.ht)
   if [ "$appguard" == "" ]; then guard="DISABLED" && opp="Enable";
 else guard="ENABLED" && opp="Disable"; fi
 tee <<-EOF
@@ -39,7 +39,7 @@ EOF
     echo ""
     read -p '↘️ [Type] a USERNAME! | PRESS [ENTER] ' user < /dev/tty
     read -p '↘️ [Type] a PASSWORD! | PRESS [ENTER] ' pw < /dev/tty
-    htpasswd -cbs /var/plexguide/server.ht $user $pw
+    htpasswd -cbs /var/pgblitz/server.ht $user $pw
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -47,8 +47,8 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
     sleep 3
-  else echo "" > /var/plexguide/server.ht; fi
-    bash /opt/plexguide/menu/appguard/rebuild.sh
+  else echo "" > /var/pgblitz/server.ht; fi
+    bash /opt/pgblitz/menu/appguard/rebuild.sh
 elif [[ "$typed" == "z" || "$typed" == "Z" ]]; then exit;
 else badinput1; fi
 }

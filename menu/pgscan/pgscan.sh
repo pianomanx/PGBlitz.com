@@ -15,7 +15,7 @@
 ################################################################################
 
 # KEY VARIABLE RECALL & EXECUTION
-mkdir -p /var/plexguide/pgscan
+mkdir -p /var/pgblitz/pgscan
 
 # FUNCTIONS START ##############################################################
 
@@ -47,11 +47,11 @@ EOF
 }
 
 token () {
- touch /var/plexguide/plex.token
- ptoken=$(cat /var/plexguide/plex.token)
+ touch /var/pgblitz/plex.token
+ ptoken=$(cat /var/pgblitz/plex.token)
  if [ "$ptoken" == "" ]; then
-   bash /opt/plexguide/menu/plex/token.sh
-   ptoken=$(cat /var/plexguide/plex.token)
+   bash /opt/pgblitz/menu/plex/token.sh
+   ptoken=$(cat /var/pgblitz/plex.token)
    if [ "$ptoken" == "" ]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -88,7 +88,7 @@ EOF
 
   read -p '↘️  Type Number | Press [ENTER]: ' typed < /dev/tty
 
-  if [ "$typed" == "1" ]; then ansible-playbook /opt/plexguide/menu/pgscan/pgscan.yml && question1;
+  if [ "$typed" == "1" ]; then ansible-playbook /opt/pgblitz/menu/pgscan/pgscan.yml && question1;
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then exit;
 else badinput; fi
 }

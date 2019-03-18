@@ -8,17 +8,17 @@
 
 ######################################################## Declare Variables
 sname="Ansible - Install"
-pg_ansible=$( cat /var/plexguide/pg.ansible )
-pg_ansible_stored=$( cat /var/plexguide/pg.ansible.stored )
+pg_ansible=$( cat /var/pgblitz/pg.ansible )
+pg_ansible_stored=$( cat /var/pgblitz/pg.ansible.stored )
 ######################################################## START: PG Log
-sudo echo "INFO - Start of Script: $sname" > /var/plexguide/logs/pg.log
-sudo bash /opt/plexguide/menu/log/log.sh
+sudo echo "INFO - Start of Script: $sname" > /var/pgblitz/logs/pg.log
+sudo bash /opt/pgblitz/menu/log/log.sh
 ######################################################## START: Main Script
 if [ "$pg_ansible" == "$pg_ansible_stored" ]; then
       echo "" 1>/dev/null 2>&1
     else
-      echo "Installing / Upgrading Ansible" > /var/plexguide/message.phase
-      bash /opt/plexguide/menu/interface/install/scripts/message.sh
+      echo "Installing / Upgrading Ansible" > /var/pgblitz/message.phase
+      bash /opt/pgblitz/menu/interface/install/scripts/message.sh
       echo ""
       #sudo apt-get remove ansible -y
       #sudo apt-add-repository --remove ppa:ansible/ansible -y && sudo add-apt-repository ppa:ansible/ansible-2.5 -y && sudo apt install ansible -y
@@ -41,11 +41,11 @@ if [ "$pg_ansible" == "$pg_ansible_stored" ]; then
       ### Disabling cows for people that have cowsay installed
       echo "nocows = 1" >> /etc/ansible/ansible.cfg
 
-      cat /var/plexguide/pg.ansible > /var/plexguide/pg.ansible.stored
+      cat /var/pgblitz/pg.ansible > /var/pgblitz/pg.ansible.stored
   fi
 ######################################################## END: Main Script
 #
 #
 ######################################################## END: PG Log
-sudo echo "INFO - END of Script: $sname" > /var/plexguide/logs/pg.log
-sudo bash /opt/plexguide/menu/log/log.sh
+sudo echo "INFO - END of Script: $sname" > /var/pgblitz/logs/pg.log
+sudo bash /opt/pgblitz/menu/log/log.sh

@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-menu=$(cat /var/plexguide/final.choice)
+menu=$(cat /var/pgblitz/final.choice)
 
 if [ "$menu" == "2" ]; then
 #read -n 1 -s -r -p "Press [ANY KEY] to Continue "
@@ -35,17 +35,17 @@ done
   echo ""
   sleep 3
 
-  echo "0" > /var/plexguide/pg.preinstall.stored
-  echo "0" > /var/plexguide/pg.ansible.stored
-  echo "0" > /var/plexguide/pg.rclone.stored
-  echo "0" > /var/plexguide/pg.python.stored
-  echo "0" > /var/plexguide/pg.docker.stored
-  echo "0" > /var/plexguide/pg.docstart.stored
-  echo "0" > /var/plexguide/pg.watchtower.stored
-  echo "0" > /var/plexguide/pg.label.stored
-  echo "0" > /var/plexguide/pg.alias.stored
-  echo "0" > /var/plexguide/pg.dep
-  rm -rf /var/plexguide/dep* 1>/dev/null 2>&1
+  echo "0" > /var/pgblitz/pg.preinstall.stored
+  echo "0" > /var/pgblitz/pg.ansible.stored
+  echo "0" > /var/pgblitz/pg.rclone.stored
+  echo "0" > /var/pgblitz/pg.python.stored
+  echo "0" > /var/pgblitz/pg.docker.stored
+  echo "0" > /var/pgblitz/pg.docstart.stored
+  echo "0" > /var/pgblitz/pg.watchtower.stored
+  echo "0" > /var/pgblitz/pg.label.stored
+  echo "0" > /var/pgblitz/pg.alias.stored
+  echo "0" > /var/pgblitz/pg.dep
+  rm -rf /var/pgblitz/dep* 1>/dev/null 2>&1
 
   echo ""
   echo "-----------------------------------------------------------"
@@ -53,7 +53,7 @@ done
   echo "-----------------------------------------------------------"
   echo ""
   sleep 2
-  ansible-playbook /opt/plexguide/menu/interface/uninstall/remove-service.yml
+  ansible-playbook /opt/pgblitz/menu/interface/uninstall/remove-service.yml
 
   echo ""
   echo "-----------------------------------------------------------"
@@ -61,7 +61,7 @@ done
   echo "-----------------------------------------------------------"
   echo ""
   sleep 2
-  rm -rf /var/plexguide
+  rm -rf /var/pgblitz
 
   echo ""
   echo "-----------------------------------------------------------"

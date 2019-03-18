@@ -15,7 +15,7 @@ while [ "$waitvar" == "0" ]; do
 	if [ -e "$file" ]; then waitvar=1; fi
 done
 
-pgnumber=$(cat "/var/plexguide/pg.number")
+pgnumber=$(cat "/var/pgblitz/pg.number")
 latest=$(cat "/opt/pgstage/versions.sh" | head -n1)
 beta=$(cat /opt/pgstage/versions.sh | sed -n 2p)
 
@@ -43,12 +43,12 @@ parttwo
 
 parttwo() {
 if [[ "$typed" == "exit" || "$typed" == "EXIT" || "$typed" == "Exit" ]]; then
-  echo ""; touch /var/plexguide/exited.upgrade; exit; fi
+  echo ""; touch /var/pgblitz/exited.upgrade; exit; fi
 
 if [ "$storage" != "" ]; then
   break=yes
-  echo $storage > /var/plexguide/pg.number
-  ansible-playbook /opt/plexguide/menu/version/choice.yml
+  echo $storage > /var/pgblitz/pg.number
+  ansible-playbook /opt/pgblitz/menu/version/choice.yml
 
 tee <<-EOF
 
@@ -57,10 +57,10 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 2
-touch /var/plexguide/new.install
+touch /var/pgblitz/new.install
 
-file="/var/plexguide/community.app"
-if [ -e "$file" ]; then rm -rf /var/plexguide/community.app; fi
+file="/var/pgblitz/community.app"
+if [ -e "$file" ]; then rm -rf /var/pgblitz/community.app; fi
 
 exit
 else
@@ -77,5 +77,5 @@ fi
 
 rm -rf /opt/pgstage
 mkdir -p /opt/pgstage
-ansible-playbook /opt/plexguide/menu/pgstage/pgstage.yml #&>/de v/null &
+ansible-playbook /opt/pgblitz/menu/pgstage/pgstage.yml #&>/de v/null &
 mainstart

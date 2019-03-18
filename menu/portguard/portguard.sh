@@ -8,8 +8,8 @@
 
 # KEY VARIABLE RECALL & EXECUTION
 program=$(cat /tmp/program_var)
-mkdir -p /var/plexguide/cron/
-mkdir -p /opt/appdata/plexguide/cron
+mkdir -p /var/pgblitz/cron/
+mkdir -p /opt/appdata/pgblitz/cron
 # FUNCTIONS START ##############################################################
 
 # BAD INPUT
@@ -21,7 +21,7 @@ read -p '⛔️ ERROR - BAD INPUT! | PRESS [ENTER] ' typed < /dev/tty
 
 # FIRST QUESTION
 question1 () {
-ports=$(cat /var/plexguide/server.ports)
+ports=$(cat /var/pgblitz/server.ports)
 if [ "$ports" == "127.0.0.1:" ]; then guard="CLOSED" && opp="Open";
 else guard="OPEN" && opp="Close"; fi
 tee <<-EOF
@@ -40,9 +40,9 @@ EOF
 
   read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
   if [ "$typed" == "1" ]; then
-    if [ "$guard" == "CLOSED" ]; then echo "" > /var/plexguide/server.ports
-  else echo "127.0.0.1:" > /var/plexguide/server.ports; fi
-    bash /opt/plexguide/menu/portguard/rebuild.sh
+    if [ "$guard" == "CLOSED" ]; then echo "" > /var/pgblitz/server.ports
+  else echo "127.0.0.1:" > /var/pgblitz/server.ports; fi
+    bash /opt/pgblitz/menu/portguard/rebuild.sh
 elif [[ "$typed" == "z" || "$typed" == "Z" ]]; then exit;
 else badinput; fi
 }

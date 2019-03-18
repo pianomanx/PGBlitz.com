@@ -17,12 +17,12 @@
         extport: "0"
 
     - name: Token Recall
-      shell: "cat /var/plexguide/plex.token"
+      shell: "cat /var/pgblitz/plex.token"
       register: token
 
     - name: Install pip requirements
       pip:
-        requirements: /opt/plexguide/menu/pgscan/requirements.txt
+        requirements: /opt/pgblitz/menu/pgscan/requirements.txt
         executable: pip2
 
     - name: "Including cron job"
@@ -35,7 +35,7 @@
 
     - name: Transfer Files
       copy:
-        src: /opt/plexguide/menu/pgscan
+        src: /opt/pgblitz/menu/pgscan
         dest: /opt/appdata
         owner: "1000"
         group: "1000"

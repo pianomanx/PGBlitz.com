@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-pgpath=$(cat /var/plexguide/server.hd.path)
+pgpath=$(cat /var/pgblitz/server.hd.path)
 
 break=no
 while [ "$break" == "no" ]; do
@@ -64,7 +64,7 @@ EOF
 
 read -p 'Type the NEW PATH (follow example above): ' typed
 
-storage=$(grep $typed /var/plexguide/ver.temp)
+storage=$(grep $typed /var/pgblitz/ver.temp)
 
   if [ "$typed" == "exit" ]; then
 tee <<-EOF
@@ -163,7 +163,7 @@ then
   echo ""
   read -n 1 -s -r -p "Press [ANY KEY] to Continue "
   echo ""
-  bash /opt/plexguide/menu/interface/dlpath/main.sh
+  bash /opt/pgblitz/menu/interface/dlpath/main.sh
   exit
 fi
 
@@ -180,7 +180,7 @@ sleep 2
     chown 1000:1000 "$typed"
     chmod 0775 "$typed"
     rm -rf "$typed/test"
-    echo $typed > /var/plexguide/server.hd.path
+    echo $typed > /var/pgblitz/server.hd.path
     break=off
 
 tee <<-EOF
@@ -191,7 +191,7 @@ SYSTEM MESSAGE: Rewriting Folders! STANDBY!
 
 EOF
 sleep 2
-ansible-playbook /opt/plexguide/menu/interface/folders/main.yml
+ansible-playbook /opt/pgblitz/menu/interface/folders/main.yml
 tee <<-EOF
 
 ---------------------------------------------------------------------------
@@ -201,7 +201,7 @@ SYSTEM MESSAGE: Rebuilding Containers! STANDBY!
 EOF
 sleep 2
 
-bash /opt/plexguide/menu/interface/dlpath/rebuild.sh
+bash /opt/pgblitz/menu/interface/dlpath/rebuild.sh
 
 tee <<-EOF
 

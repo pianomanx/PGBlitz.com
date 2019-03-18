@@ -7,7 +7,7 @@
 ################################################################################
 
 # KEY VARIABLE RECALL & EXECUTION
-mkdir -p /var/plexguide/pgtrakt
+mkdir -p /var/pgblitz/pgtrakt
 
 # FUNCTIONS START ##############################################################
 
@@ -89,7 +89,7 @@ Quality Set Is: $typed
 
 EOF
 
-echo "$typed" > /var/plexguide/pgtrak.sprofile
+echo "$typed" > /var/pgblitz/pgtrak.sprofile
 read -p '🌎 Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 question1
 fi
@@ -132,7 +132,7 @@ Quality Set Is: $typed
 
 EOF
 
-echo "$typed" > /var/plexguide/pgtrak.rprofile
+echo "$typed" > /var/pgblitz/pgtrak.rprofile
 read -p '🌎 Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 question1
 fi
@@ -160,9 +160,9 @@ continuing, please follow the current steps.
 Go Back? Type > exit
 EOF
 read -p '↘️ Type API Client | Press [ENTER]: ' typed < /dev/tty
-echo $typed > /var/plexguide/pgtrak.client
+echo $typed > /var/pgblitz/pgtrak.client
 read -p '↘️ Type API Secret | Press [ENTER]: ' typed < /dev/tty
-echo $typed > /var/plexguide/pgtrak.secret
+echo $typed > /var/pgblitz/pgtrak.secret
 
   if [ "$typed" == "exit" ]; then question1;
 else
@@ -256,7 +256,7 @@ EOF
 #typed=${typed:4}
 #fi
 
-echo "$typed" > /var/plexguide/pgtrak.spath
+echo "$typed" > /var/pgblitz/pgtrak.spath
 read -p '🌎 Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 echo ""
 question1
@@ -346,7 +346,7 @@ EOF
 #typed=${typed:4}
 #fi
 
-echo "$typed" > /var/plexguide/pgtrak.rpath
+echo "$typed" > /var/pgblitz/pgtrak.rpath
 read -p '🌎 Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 echo ""
 question1
@@ -370,11 +370,11 @@ fi
 }
 
 token () {
- touch /var/plexguide/plex.token
- ptoken=$(cat /var/plexguide/plex.token)
+ touch /var/pgblitz/plex.token
+ ptoken=$(cat /var/pgblitz/plex.token)
  if [ "$ptoken" == "" ]; then
-   bash /opt/plexguide/menu/plex/token.sh
-   ptoken=$(cat /var/plexguide/plex.token)
+   bash /opt/pgblitz/menu/plex/token.sh
+   ptoken=$(cat /var/pgblitz/plex.token)
    if [ "$ptoken" == "" ]; then
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -406,8 +406,8 @@ tee <<-EOF
 
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed < /dev/tty
-    if [ "$typed" == "1" ]; then echo "False" > /var/plexguide/pgtrakt/video.transcodes && question1;
-  elif [ "$typed" == "2" ]; then echo "True" > /var/plexguide/pgtrakt/video.transcodes && question1;
+    if [ "$typed" == "1" ]; then echo "False" > /var/pgblitz/pgtrakt/video.transcodes && question1;
+  elif [ "$typed" == "2" ]; then echo "True" > /var/pgblitz/pgtrakt/video.transcodes && question1;
     else badinput; fi
 }
 
@@ -423,7 +423,7 @@ Set a Number from 1 - 99
 
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed < /dev/tty
-    if [[ "$typed" -ge "1" && "$typed" -le "99" ]]; then echo "$typed" > /var/plexguide/pgtrakt/multiple.ips && question1;
+    if [[ "$typed" -ge "1" && "$typed" -le "99" ]]; then echo "$typed" > /var/pgblitz/pgtrakt/multiple.ips && question1;
     else badinput; fi
 }
 
@@ -439,20 +439,20 @@ Set a Number from 5 - 999 Mintues
 
 EOF
   read -p 'Type Number | PRESS [ENTER] ' typed < /dev/tty
-    if [[ "$typed" -ge "1" && "$typed" -le "999" ]]; then echo "$typed" > /var/plexguide/pgtrakt/kick.minutes && question1;
+    if [[ "$typed" -ge "1" && "$typed" -le "999" ]]; then echo "$typed" > /var/pgblitz/pgtrakt/kick.minutes && question1;
     else badinput; fi
 }
 
 # FIRST QUESTION
 question1 () {
 
-api=$(cat /var/plexguide/pgtrak.secret)
+api=$(cat /var/pgblitz/pgtrak.secret)
 if [ "$api" == "NOT-SET" ]; then api="NOT-SET"; else api="SET"; fi
 
-rpath=$(cat /var/plexguide/pgtrak.rpath)
-spath=$(cat /var/plexguide/pgtrak.spath)
-rprofile=$(cat /var/plexguide/pgtrak.rprofile)
-sprofile=$(cat /var/plexguide/pgtrak.sprofile)
+rpath=$(cat /var/pgblitz/pgtrak.rpath)
+spath=$(cat /var/pgblitz/pgtrak.spath)
+rprofile=$(cat /var/pgblitz/pgtrak.rprofile)
+sprofile=$(cat /var/pgblitz/pgtrak.sprofile)
 deploycheck
 
 tee <<-EOF
@@ -530,7 +530,7 @@ then
 info=$( cat /opt/appdata/radarr/config.xml )
 info=${info#*<ApiKey>} 1>/dev/null 2>&1
 info1=$( echo ${info:0:32} ) 1>/dev/null 2>&1
-echo "$info1" > /var/plexguide/pgtrak.rapi
+echo "$info1" > /var/pgblitz/pgtrak.rapi
 fi
 
 file="/opt/appdata/sonarr/config.xml"
@@ -539,11 +539,11 @@ then
 info=$( cat /opt/appdata/sonarr/config.xml )
 info=${info#*<ApiKey>} 1>/dev/null 2>&1
 info2=$( echo ${info:0:32} ) 1>/dev/null 2>&1
-echo "$info2" > /var/plexguide/pgtrak.sapi
+echo "$info2" > /var/pgblitz/pgtrak.sapi
 fi
 fi
 # keys for sonarr and radarr need to be added
-ansible-playbook /opt/plexguide/menu/pgtrakt/pgtrakt.yml && question1;
+ansible-playbook /opt/pgblitz/menu/pgtrakt/pgtrakt.yml && question1;
 
 elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then exit;
 else badinput; fi
@@ -551,13 +551,13 @@ else badinput; fi
 
 # FUNCTIONS END ##############################################################
 token
-variable /var/plexguide/pgtrak.client "NOT-SET"
-variable /var/plexguide/pgtrak.secret "NOT-SET"
-variable /var/plexguide/pgtrak.rpath "NOT-SET"
-variable /var/plexguide/pgtrak.spath "NOT-SET"
-variable /var/plexguide/pgtrak.sprofile "NOT-SET"
-variable /var/plexguide/pgtrak.rprofile "NOT-SET"
-variable /var/plexguide/pgtrak.rprofile "NOT-SET"
+variable /var/pgblitz/pgtrak.client "NOT-SET"
+variable /var/pgblitz/pgtrak.secret "NOT-SET"
+variable /var/pgblitz/pgtrak.rpath "NOT-SET"
+variable /var/pgblitz/pgtrak.spath "NOT-SET"
+variable /var/pgblitz/pgtrak.sprofile "NOT-SET"
+variable /var/pgblitz/pgtrak.rprofile "NOT-SET"
+variable /var/pgblitz/pgtrak.rprofile "NOT-SET"
 
 deploycheck
 question1

@@ -21,11 +21,11 @@ tee <<-EOF
 * Not Ready? Just Something & Press [ENTER]
 
 EOF
-hcloud context create plexguide
+hcloud context create pgblitz
 
   test=$(hcloud server list)
   if [ "$test" == "" ]; then
-    hcloud context delete plexguide
+    hcloud context delete pgblitz
   exit
   fi
 
@@ -94,7 +94,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-  hcloud server create --name $name --type cx11 --image ubuntu-18.04 > /opt/appdata/plexguide/server.info
+  hcloud server create --name $name --type cx11 --image ubuntu-18.04 > /opt/appdata/pgblitz/server.info
 
 tee <<-EOF
 
@@ -103,17 +103,17 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 EOF
-cat /opt/appdata/plexguide/server.info
+cat /opt/appdata/pgblitz/server.info
 
 # Creates Log
-touch /opt/appdata/plexguide/server.store
-cat /opt/appdata/plexguide/server.info >> /opt/appdata/plexguide/server.store
-echo "Server Name: $name" >> /opt/appdata/plexguide/server.store
-echo "" >> /opt/appdata/plexguide/server.store
+touch /opt/appdata/pgblitz/server.store
+cat /opt/appdata/pgblitz/server.info >> /opt/appdata/pgblitz/server.store
+echo "Server Name: $name" >> /opt/appdata/pgblitz/server.store
+echo "" >> /opt/appdata/pgblitz/server.store
 
 # Variable Info
-serverip=$(cat /opt/appdata/plexguide/server.info | tail -n +3 | head -n 1 | cut -d " " -f2-)
-initialpw=$(cat /opt/appdata/plexguide/server.info | tail -n +4 | cut -d " " -f3-)
+serverip=$(cat /opt/appdata/pgblitz/server.info | tail -n +3 | head -n 1 | cut -d " " -f2-)
+initialpw=$(cat /opt/appdata/pgblitz/server.info | tail -n +4 | cut -d " " -f3-)
 
 tee <<-EOF
 
@@ -141,7 +141,7 @@ echo "ssh root@$serverip" >> /bin/pg-$name
 chmod 777 /bin/pg-$name
 chown 1000:1000 /bin/pg-$name
 
-bash /opt/plexguide/menu/hetzner/hetzner.sh
+bash /opt/pgblitz/menu/hetzner/hetzner.sh
 exit
 
 elif [ "$typed" == "A" ] || [ "$typed" == "a" ]; then
@@ -158,7 +158,7 @@ hcloud server list | tail -n +2 | cut -d " " -f2- | cut -d " " -f2- | cut -d " "
 echo
 read -p 'Press [ENTER] to Continue! ' typed < /dev/tty
 
-bash /opt/plexguide/menu/hetzner/hetzner.sh
+bash /opt/pgblitz/menu/hetzner/hetzner.sh
 exit
 
 elif [ "$typed" == "2" ]; then
@@ -176,7 +176,7 @@ echo
 echo "Quit? Type >>> exit"
 read -p 'Type a Server to Destroy | Press [ENTER]: ' destroy < /dev/tty
   if [ "$destroy" == "exit" ]; then
-    bash /opt/plexguide/menu/hetzner/hetzner.sh
+    bash /opt/pgblitz/menu/hetzner/hetzner.sh
     exit
   else
     check=$(hcloud server list | tail -n +2 | cut -d " " -f2- | cut -d " " -f2- | cut -d " " -f2-)
@@ -190,7 +190,7 @@ tee <<-EOF
 
 EOF
     read -p 'Press [ENTER] to Continue! ' typed < /dev/tty
-    bash /opt/plexguide/menu/hetzner/hetzner.sh
+    bash /opt/pgblitz/menu/hetzner/hetzner.sh
     exit
   fi
   echo
@@ -204,7 +204,7 @@ tee <<-EOF
 EOF
     read -p 'Press [ENTER] to Continue! ' typed < /dev/tty
     rm -rf /bin/pg-$destroy
-    bash /opt/plexguide/menu/hetzner/hetzner.sh
+    bash /opt/pgblitz/menu/hetzner/hetzner.sh
     exit
   fi
 
@@ -219,18 +219,18 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
-touch /opt/appdata/plexguide/server.store
-tac -r /opt/appdata/plexguide/server.store
+touch /opt/appdata/pgblitz/server.store
+tac -r /opt/appdata/pgblitz/server.store
 echo "" & echo ""
 read -p 'Press [ENTER] to Continue! ' corn < /dev/tty
 
-bash /opt/plexguide/menu/hetzner/hetzner.sh
+bash /opt/pgblitz/menu/hetzner/hetzner.sh
 exit
 
 elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
   exit
 else
-  bash /opt/plexguide/menu/hetzner/hetzner.sh
+  bash /opt/pgblitz/menu/hetzner/hetzner.sh
   exit
 fi
 

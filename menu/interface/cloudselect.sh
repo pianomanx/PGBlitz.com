@@ -23,10 +23,10 @@ EOF
 read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
 
   if [ "$typed" == "1" ]; then
-    echo gce > /var/plexguide/type.choice
-    bash /opt/plexguide/menu/pgcloner/blitzgce.sh
+    echo gce > /var/pgblitz/type.choice
+    bash /opt/pgblitz/menu/pgcloner/blitzgce.sh
 elif [ "$typed" == "2" ]; then
-    bash /opt/plexguide/menu/pgcloner/hetzner.sh
+    bash /opt/pgblitz/menu/pgcloner/hetzner.sh
 elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
     exit
 else
@@ -38,6 +38,6 @@ tee <<-EOF
 
 EOF
 
-  bash /opt/plexguide/menu/cloudselect/cloudselect.sh
+  bash /opt/pgblitz/menu/cloudselect/cloudselect.sh
   exit
 fi

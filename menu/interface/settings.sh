@@ -5,13 +5,13 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
-source /opt/plexguide/menu/functions/install.sh
+source /opt/pgblitz/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/install.sh
 # Menu Interface
 setstart() {
 
-emdisplay=$(cat /var/plexguide/emergency.display)
-switchcheck=$(cat /var/plexguide/pgui.switch)
+emdisplay=$(cat /var/pgblitz/emergency.display)
+switchcheck=$(cat /var/pgblitz/pgui.switch)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -34,10 +34,10 @@ read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
 
 case $typed in
     1 )
-      bash /opt/plexguide/menu/dlpath/dlpath.sh
+      bash /opt/pgblitz/menu/dlpath/dlpath.sh
       setstart;;
     2 )
-      bash /opt/plexguide/menu/processor/processor.sh
+      bash /opt/pgblitz/menu/processor/processor.sh
       setstart ;;
     3 )
       watchtower ;;
@@ -48,17 +48,17 @@ case $typed in
       echo "Standby ..."
       echo
       if [[ "$switchcheck" == "On" ]]; then
-         echo "Off" > /var/plexguide/pgui.switch
+         echo "Off" > /var/pgblitz/pgui.switch
          docker stop pgui
          docker rm pgui
-      else echo "On" > /var/plexguide/pgui.switch
-        bash /opt/plexguide/menu/pgcloner/solo/pgui.sh
+      else echo "On" > /var/pgblitz/pgui.switch
+        bash /opt/pgblitz/menu/pgcloner/solo/pgui.sh
         ansible-playbook /opt/pgui/pgui.yml
       fi
       setstart ;;
     6)
-       if [[ "$emdisplay" == "On" ]]; then echo "Off" > /var/plexguide/emergency.display
-       else echo "On" > /var/plexguide/emergency.display; fi
+       if [[ "$emdisplay" == "On" ]]; then echo "Off" > /var/pgblitz/emergency.display
+       else echo "On" > /var/pgblitz/emergency.display; fi
        setstart ;;
     z )
       exit ;;

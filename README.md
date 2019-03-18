@@ -1,7 +1,7 @@
 <p align="center">
   <a href="https://pgblitz.com/forums" target="_blank"><img src="https://pgblitz.com/wikipics/logo-forums.png" width="160"/>   
   <a href="https://github.com/PGBlitz/PGBlitz.com/wiki" target="_blank"><img src="https://pgblitz.com/wikipics/logo-wiki.png" width="160"/>
-  <a href="https://pgblitz.com/threads/plexguide-install-instructions.243/" target="_blank"><img src="https://pgblitz.com/wikipics/logo-pg-install.png" width="160"/> 
+  <a href="https://pgblitz.com/threads/pgblitz-install-instructions.243/" target="_blank"><img src="https://pgblitz.com/wikipics/logo-pg-install.png" width="160"/> 
   <a href="https://pgblitz.com/account/upgrades" target="_blank"><img src="https://pgblitz.com/wikipics/logo-donate.png" width="160"/>
 </p>
 
@@ -32,7 +32,7 @@ _**Table of Contents**_
 <a href="https://youtu.be/s3hrY2x1a2M"><img src="https://pgblitz.com/press/wp-content/uploads/2019/02/youtube-install-v9-2-1024x578.png" width="600"/></kbd></p>
 <p align="center">
 
-[**[Click Here]**](https://pgblitz.com/threads/plexguide-install-instructions.243/) for installation instructions to start the process
+[**[Click Here]**](https://pgblitz.com/threads/pgblitz-install-instructions.243/) for installation instructions to start the process
 
 ## 2. Project Statement
 <p align="center"><kbd><img src="https://pgblitz.com/press/wp-content/uploads/2019/02/explode.gif" width="600""></kbd></p>

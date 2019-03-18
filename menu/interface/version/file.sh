@@ -5,14 +5,14 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-rm -rf /var/plexguide/ver.temp 1>/dev/null 2>&1
-touch /var/plexguide/ver.temp
+rm -rf /var/pgblitz/ver.temp 1>/dev/null 2>&1
+touch /var/pgblitz/ver.temp
 
 sleep 4
 ## Builds Version List for Display
 while read p; do
-  echo $p >> /var/plexguide/ver.temp
-done </opt/plexguide/menu/interface/version/version.sh
+  echo $p >> /var/pgblitz/ver.temp
+done </opt/pgblitz/menu/interface/version/version.sh
 
 tee <<-EOF
 
@@ -22,24 +22,24 @@ tee <<-EOF
 
 EOF
 
-cat /var/plexguide/ver.temp
+cat /var/pgblitz/ver.temp
 echo ""
 echo "To QUIT, type >>> exit"
 break=no
 while [ "$break" == "no" ]; do
 read -p '↘️  Type [PG Version] | PRESS ENTER: ' typed
-storage=$(grep $typed /var/plexguide/ver.temp)
+storage=$(grep $typed /var/pgblitz/ver.temp)
 
 if [ "$typed" == "exit" ]; then
   echo ""
-  touch /var/plexguide/exited.upgrade
+  touch /var/pgblitz/exited.upgrade
   exit
 fi
 
 if [ "$storage" != "" ]; then
   break=yes
-  echo $storage > /var/plexguide/pg.number
-  ansible-playbook /opt/plexguide/menu/interface/version/choice.yml
+  echo $storage > /var/pgblitz/pg.number
+  ansible-playbook /opt/pgblitz/menu/interface/version/choice.yml
 
 tee <<-EOF
 
@@ -56,7 +56,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
   sleep 4
-  cat /var/plexguide/ver.temp
+  cat /var/pgblitz/ver.temp
   echo ""
 fi
 

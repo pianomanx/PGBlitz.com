@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 # Menu Interface
 question1 (){
 tee <<-EOF
@@ -32,7 +32,7 @@ if [ "$typed" == "1" ]; then
   question1
 elif [ "$typed" == "2" ]; then
   echo ""
-  curl -LsO raw.githubusercontent.com/Admin9705/plexguide-bench/master/bench.sh; chmod +x bench.sh; chmod +x bench.sh
+  curl -LsO raw.githubusercontent.com/Admin9705/pgblitz-bench/master/bench.sh; chmod +x bench.sh; chmod +x bench.sh
   echo ""
   ./bench.sh -a
   echo ""

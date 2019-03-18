@@ -7,17 +7,17 @@
 ################################################################################
 
 # FUNCTIONS START ##############################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 
-rolename=$(cat /var/plexguide/pgcloner.rolename)
-roleproper=$(cat /var/plexguide/pgcloner.roleproper)
-projectname=$(cat /var/plexguide/pgcloner.projectname)
-projectversion=$(cat /var/plexguide/pgcloner.projectversion)
+rolename=$(cat /var/pgblitz/pgcloner.rolename)
+roleproper=$(cat /var/pgblitz/pgcloner.roleproper)
+projectname=$(cat /var/pgblitz/pgcloner.projectname)
+projectversion=$(cat /var/pgblitz/pgcloner.projectversion)
 
 mkdir -p "/opt/$rolename"
 
 initial () {
-  ansible-playbook "/opt/plexguide/menu/pgcloner/core/primary.yml"
+  ansible-playbook "/opt/pgblitz/menu/pgcloner/core/primary.yml"
   echo ""
   echo "💬  Pulling Update Files - Please Wait"
   file="/opt/$rolename/place.holder"
@@ -30,7 +30,7 @@ initial () {
 
 custom () {
   mkdir -p "/opt/$rolename"
-  ansible-playbook "/opt/plexguide/menu/pgcloner/core/personal.yml"
+  ansible-playbook "/opt/pgblitz/menu/pgcloner/core/personal.yml"
 
   echo ""
   echo "💬  Pulling Update Files - Please Wait"
@@ -43,7 +43,7 @@ custom () {
 }
 
 mainbanner () {
-clonerinfo=$(cat /var/plexguide/pgcloner.info)
+clonerinfo=$(cat /var/pgblitz/pgcloner.info)
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -65,8 +65,8 @@ case $typed in
     1 )
         initial ;;
     2 )
-        variable /var/plexguide/$rolename.user "NOT-SET"
-        variable /var/plexguide/$rolename.branch "NOT-SET"
+        variable /var/pgblitz/$rolename.user "NOT-SET"
+        variable /var/pgblitz/$rolename.branch "NOT-SET"
         pinterface ;;
     z )
         exit ;;
@@ -79,8 +79,8 @@ esac
 
 pinterface () {
 
-user=$(cat /var/plexguide/$rolename.user)
-branch=$(cat /var/plexguide/$rolename.branch)
+user=$(cat /var/pgblitz/$rolename.user)
+branch=$(cat /var/pgblitz/$rolename.branch)
 
 tee <<-EOF
 
@@ -113,8 +113,8 @@ default or selected branch!
 EOF
         read -p 'Username | Press [ENTER]: ' user < /dev/tty
         read -p 'Branch   | Press [ENTER]: ' branch < /dev/tty
-        echo "$user" > /var/plexguide/$rolename.user
-        echo "$branch" > /var/plexguide/$rolename.branch
+        echo "$user" > /var/pgblitz/$rolename.user
+        echo "$branch" > /var/pgblitz/$rolename.branch
         pinterface ;;
     2 )
         existcheck=$(git ls-remote --exit-code -h "https://github.com/$user/$projectname" | grep "$branch")

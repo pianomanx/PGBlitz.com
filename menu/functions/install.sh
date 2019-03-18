@@ -5,31 +5,31 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 
 updateprime() {
-  abc="/var/plexguide"
+  abc="/var/pgblitz"
   mkdir -p ${abc}
   chmod 0755 ${abc}
   chown 1000:1000 ${abc}
 
-  mkdir -p /opt/appdata/plexguide
-  chmod 0755 /opt/appdata/plexguide
-  chown 1000:1000 /opt/appdata/plexguide
+  mkdir -p /opt/appdata/pgblitz
+  chmod 0755 /opt/appdata/pgblitz
+  chown 1000:1000 /opt/appdata/pgblitz
 
-  variable /var/plexguide/pgfork.project "UPDATE ME"
-  variable /var/plexguide/pgfork.version "changeme"
-  variable /var/plexguide/tld.program "portainer"
-  variable /opt/appdata/plexguide/plextoken ""
-  variable /var/plexguide/server.ht ""
-  variable /var/plexguide/server.email "NOT-SET"
-  variable /var/plexguide/server.domain "NOT-SET"
-  variable /var/plexguide/pg.number "New-Install"
-  variable /var/plexguide/emergency.log ""
-  variable /var/plexguide/pgbox.running ""
-  pgnumber=$(cat /var/plexguide/pg.number)
+  variable /var/pgblitz/pgfork.project "UPDATE ME"
+  variable /var/pgblitz/pgfork.version "changeme"
+  variable /var/pgblitz/tld.program "portainer"
+  variable /opt/appdata/pgblitz/plextoken ""
+  variable /var/pgblitz/server.ht ""
+  variable /var/pgblitz/server.email "NOT-SET"
+  variable /var/pgblitz/server.domain "NOT-SET"
+  variable /var/pgblitz/pg.number "New-Install"
+  variable /var/pgblitz/emergency.log ""
+  variable /var/pgblitz/pgbox.running ""
+  pgnumber=$(cat /var/pgblitz/pg.number)
 
-  hostname -I | awk '{print $1}' > /var/plexguide/server.ip
+  hostname -I | awk '{print $1}' > /var/pgblitz/server.ip
   file="${abc}/server.hd.path"
   if [ ! -e "$file" ]; then echo "/mnt" > ${abc}/server.hd.path; fi
 
@@ -67,7 +67,7 @@ updateprime() {
 
 pginstall () {
   updateprime
-  bash /opt/plexguide/menu/pggce/gcechecker.sh
+  bash /opt/pgblitz/menu/pggce/gcechecker.sh
   core pythonstart
   core aptupdate
   core alias &>/dev/null &
@@ -78,10 +78,10 @@ pginstall () {
   core docstart
 
 
-touch /var/plexguide/install.roles
+touch /var/pgblitz/install.roles
 rolenumber=3
   # Roles Ensure that PG Replicates and has once if missing; important for startup, cron and etc
-if [[ $(cat /var/plexguide/install.roles) != "$rolenumber" ]]; then
+if [[ $(cat /var/pgblitz/install.roles) != "$rolenumber" ]]; then
   rm -rf /opt/communityapps
   rm -rf /opt/coreapps
   rm -rf /opt/pgshield
@@ -89,7 +89,7 @@ if [[ $(cat /var/plexguide/install.roles) != "$rolenumber" ]]; then
   pgcore
   pgcommunity
   pgshield
-  echo "$rolenumber" > /var/plexguide/install.roles
+  echo "$rolenumber" > /var/pgblitz/install.roles
 fi
 
   portainer
@@ -109,18 +109,18 @@ fi
 }
 
 core () {
-    touch /var/plexguide/pg."${1}".stored
-    start=$(cat /var/plexguide/pg."${1}")
-    stored=$(cat /var/plexguide/pg."${1}".stored)
+    touch /var/pgblitz/pg."${1}".stored
+    start=$(cat /var/pgblitz/pg."${1}")
+    stored=$(cat /var/pgblitz/pg."${1}".stored)
     if [ "$start" != "$stored" ]; then
       $1
-      cat /var/plexguide/pg."${1}" > /var/plexguide/pg."${1}".stored;
+      cat /var/pgblitz/pg."${1}" > /var/pgblitz/pg."${1}".stored;
     fi
 }
 
 ############################################################ INSTALLER FUNCTIONS
 alias () {
-  ansible-playbook /opt/plexguide/menu/alias/alias.yml
+  ansible-playbook /opt/pgblitz/menu/alias/alias.yml
 }
 
 aptupdate () {
@@ -138,29 +138,29 @@ rclone --config /opt/appdata/pgblitz/rclone.conf copy /opt/mycontainers/ /opt/co
 }
 
 cleaner () {
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags autodelete &>/dev/null &
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags clean &>/dev/null &
-  ansible-playbook /opt/plexguide/menu/pg.yml --tags clean-encrypt &>/dev/null &
+  ansible-playbook /opt/pgblitz/menu/pg.yml --tags autodelete &>/dev/null &
+  ansible-playbook /opt/pgblitz/menu/pg.yml --tags clean &>/dev/null &
+  ansible-playbook /opt/pgblitz/menu/pg.yml --tags clean-encrypt &>/dev/null &
 }
 
 dependency () {
-  ospgversion=$(cat /var/plexguide/os.version)
+  ospgversion=$(cat /var/pgblitz/os.version)
   if [ "$ospgversion" == "debian" ]; then
-    ansible-playbook /opt/plexguide/menu/dependency/dependencydeb.yml;
+    ansible-playbook /opt/pgblitz/menu/dependency/dependencydeb.yml;
   else
-    ansible-playbook /opt/plexguide/menu/dependency/dependency.yml; fi
+    ansible-playbook /opt/pgblitz/menu/dependency/dependency.yml; fi
 }
 
 docstart () {
-   ansible-playbook /opt/plexguide/menu/pg.yml --tags docstart
+   ansible-playbook /opt/pgblitz/menu/pg.yml --tags docstart
 }
 
 emergency() {
-  variable /var/plexguide/emergency.display "On"
-if [[ $(ls /opt/appdata/plexguide/emergency) != "" ]]; then
+  variable /var/pgblitz/emergency.display "On"
+if [[ $(ls /opt/appdata/pgblitz/emergency) != "" ]]; then
 
 # If not on, do not display emergency logs
-if [[ $(cat /var/plexguide/emergency.display) == "On" ]]; then
+if [[ $(cat /var/pgblitz/emergency.display) == "On" ]]; then
 
 tee <<-EOF
 
@@ -174,34 +174,34 @@ EOF
   countmessage=0
   while read p; do
     let countmessage++
-    echo -n "${countmessage}. " && cat /opt/appdata/plexguide/emergency/$p
-  done <<< "$(ls /opt/appdata/plexguide/emergency)"
+    echo -n "${countmessage}. " && cat /opt/appdata/pgblitz/emergency/$p
+  done <<< "$(ls /opt/appdata/pgblitz/emergency)"
 
   echo
   read -n 1 -s -r -p "Acknowledge Info | Press [ENTER]"
   echo
 else
-  touch /var/plexguide/emergency.log
+  touch /var/pgblitz/emergency.log
 fi; fi
 
 }
 
 folders () {
-  ansible-playbook /opt/plexguide/menu/installer/folders.yml
+  ansible-playbook /opt/pgblitz/menu/installer/folders.yml
 }
 
 prune () {
-  ansible-playbook /opt/plexguide/menu/prune/main.yml
+  ansible-playbook /opt/pgblitz/menu/prune/main.yml
 }
 
 hetzner () {
   if [ -e "$file" ]; then rm -rf /bin/hcloud; fi
   version="v1.10.0"
-  wget -P /opt/appdata/plexguide "https://github.com/hetznercloud/cli/releases/download/$version/hcloud-linux-amd64-$version.tar.gz"
-  tar -xvf "/opt/appdata/plexguide/hcloud-linux-amd64-$version.tar.gz" -C /opt/appdata/plexguide
-  mv "/opt/appdata/plexguide/hcloud-linux-amd64-$version/bin/hcloud" /bin/
-  rm -rf /opt/appdata/plexguide/hcloud-linux-amd64-$version.tar.gz
-  rm -rf /opt/appdata/plexguide/hcloud-linux-amd64-$version
+  wget -P /opt/appdata/pgblitz "https://github.com/hetznercloud/cli/releases/download/$version/hcloud-linux-amd64-$version.tar.gz"
+  tar -xvf "/opt/appdata/pgblitz/hcloud-linux-amd64-$version.tar.gz" -C /opt/appdata/pgblitz
+  mv "/opt/appdata/pgblitz/hcloud-linux-amd64-$version/bin/hcloud" /bin/
+  rm -rf /opt/appdata/pgblitz/hcloud-linux-amd64-$version.tar.gz
+  rm -rf /opt/appdata/pgblitz/hcloud-linux-amd64-$version
 }
 
 gcloud () {
@@ -220,25 +220,25 @@ mergerinstall () {
 
     apt --fix-broken install -y
     apt-get remove mergerfs -y
-    mkdir -p /var/plexguide
+    mkdir -p /var/pgblitz
 
     if [ "$ub16check" != "" ]; then
     activated=true
-    echo "ub16" > /var/plexguide/mergerfs.version
+    echo "ub16" > /var/pgblitz/mergerfs.version
     wget "https://github.com/trapexit/mergerfs/releases/download/2.25.1/mergerfs_2.25.1.ubuntu-xenial_amd64.deb"
 
     elif [ "$ub18check" != "" ]; then
       activated=true
-      echo "ub18" > /var/plexguide/mergerfs.version
+      echo "ub18" > /var/pgblitz/mergerfs.version
       wget "https://github.com/trapexit/mergerfs/releases/download/2.25.1/mergerfs_2.25.1.ubuntu-bionic_amd64.deb"
 
     elif [ "$deb9check" != "" ]; then
       activated=true
-      echo "deb9" > /var/plexguide/mergerfs.version
+      echo "deb9" > /var/pgblitz/mergerfs.version
       wget "https://github.com/trapexit/mergerfs/releases/download/2.25.1/mergerfs_2.25.1.debian-stretch_amd64.deb"
 
     elif [ "$activated" != "true" ]; then
-      activated=true && echo "ub18 - but didn't detect correctly" > /var/plexguide/mergerfs.version
+      activated=true && echo "ub18 - but didn't detect correctly" > /var/pgblitz/mergerfs.version
       wget "https://github.com/trapexit/mergerfs/releases/download/2.25.1/mergerfs_2.25.1.ubuntu-bionic_amd64.deb"
     else
       apt-get install g++ pkg-config git git-buildpackage pandoc debhelper libfuse-dev libattr1-dev -y
@@ -254,13 +254,13 @@ mergerinstall () {
 }
 
 motd () {
-  ansible-playbook /opt/plexguide/menu/motd/motd.yml
+  ansible-playbook /opt/pgblitz/menu/motd/motd.yml
 }
 
 mountcheck () {
-  bash /opt/plexguide/menu/pgcloner/solo/pgui.sh
+  bash /opt/pgblitz/menu/pgcloner/solo/pgui.sh
   ansible-playbook /opt/pgui/pgui.yml
-  ansible-playbook /opt/plexguide/menu/pgui/mcdeploy.yml
+  ansible-playbook /opt/pgblitz/menu/pgui/mcdeploy.yml
 
 tee <<-EOF
 
@@ -282,24 +282,24 @@ read -p 'Acknowledge Info | Press [ENTER] ' typed < /dev/tty
 }
 
 newinstall () {
-  rm -rf /var/plexguide/pg.exit 1>/dev/null 2>&1
+  rm -rf /var/pgblitz/pg.exit 1>/dev/null 2>&1
   file="${abc}/new.install"
   if [ ! -e "$file" ]; then
     touch ${abc}/pg.number && echo off > /tmp/program_source
-    bash /opt/plexguide/menu/version/file.sh
+    bash /opt/pgblitz/menu/version/file.sh
     file="${abc}/new.install"
     if [ ! -e "$file" ]; then exit; fi
  fi
 }
 
 pgdeploy () {
-  touch /var/plexguide/pg.edition
-  bash /opt/plexguide/menu/start/start.sh
+  touch /var/pgblitz/pg.edition
+  bash /opt/pgblitz/menu/start/start.sh
 }
 
 pgedition () {
   file="${abc}/path.check"
-  if [ ! -e "$file" ]; then touch ${abc}/path.check && bash /opt/plexguide/menu/dlpath/dlpath.sh; fi
+  if [ ! -e "$file" ]; then touch ${abc}/path.check && bash /opt/pgblitz/menu/dlpath/dlpath.sh; fi
   # FOR PG-BLITZ
   file="${abc}/project.deployed"
     if [ ! -e "$file" ]; then echo "no" > ${abc}/project.deployed; fi
@@ -317,27 +317,27 @@ portainer () {
 }
 
 # Roles Ensure that PG Replicates and has once if missing; important for startup, cron and etc
-pgcore() { if [ ! -e "/opt/coreapps/place.holder" ]; then ansible-playbook /opt/plexguide/menu/pgbox/pgboxcore.yml; fi }
-pgcommunity() { if [ ! -e "/opt/communityapps/place.holder" ]; then ansible-playbook /opt/plexguide/menu/pgbox/pgboxcommunity.yml; fi }
+pgcore() { if [ ! -e "/opt/coreapps/place.holder" ]; then ansible-playbook /opt/pgblitz/menu/pgbox/pgboxcore.yml; fi }
+pgcommunity() { if [ ! -e "/opt/communityapps/place.holder" ]; then ansible-playbook /opt/pgblitz/menu/pgbox/pgboxcommunity.yml; fi }
 pgshield() { if [ ! -e "/opt/pgshield/place.holder" ]; then
-echo 'pgshield' > /var/plexguide/pgcloner.rolename
-echo 'PGShield' > /var/plexguide/pgcloner.roleproper
-echo 'PGShield' > /var/plexguide/pgcloner.projectname
-echo 'v8.6' > /var/plexguide/pgcloner.projectversion
-echo 'pgshield.sh' > /var/plexguide/pgcloner.startlink
-ansible-playbook "/opt/plexguide/menu/pgcloner/corev2/primary.yml"; fi }
+echo 'pgshield' > /var/pgblitz/pgcloner.rolename
+echo 'PGShield' > /var/pgblitz/pgcloner.roleproper
+echo 'PGShield' > /var/pgblitz/pgcloner.projectname
+echo 'v8.6' > /var/pgblitz/pgcloner.projectversion
+echo 'pgshield.sh' > /var/pgblitz/pgcloner.startlink
+ansible-playbook "/opt/pgblitz/menu/pgcloner/corev2/primary.yml"; fi }
 
 pgui ()
 {
-  file="/var/plexguide/pgui.switch"
-    if [ ! -e "$file" ]; then echo "On" > /var/plexguide/pgui.switch; fi
+  file="/var/pgblitz/pgui.switch"
+    if [ ! -e "$file" ]; then echo "On" > /var/pgblitz/pgui.switch; fi
 
-    pguicheck=$(cat /var/plexguide/pgui.switch)
+    pguicheck=$(cat /var/pgblitz/pgui.switch)
   if [[ "$pguicheck" == "On" ]]; then
 
     dstatus=$(docker ps --format '{{.Names}}' | grep "pgui")
     if [ "$dstatus" != "pgui" ]; then
-    bash /opt/plexguide/menu/pgcloner/solo/pgui.sh
+    bash /opt/pgblitz/menu/pgcloner/solo/pgui.sh
     ansible-playbook /opt/pgui/pgui.yml
     fi
 fi
@@ -379,15 +379,15 @@ pythonstart () {
   echo "inventory = /etc/ansible/inventories/local" >> /etc/ansible/ansible.cfg
 
   # Variables Need to Line Up with pg.sh (start)
-  touch /var/plexguide/background.1
+  touch /var/pgblitz/background.1
 }
 
 dockerinstall () {
-  ospgversion=$(cat /var/plexguide/os.version)
+  ospgversion=$(cat /var/pgblitz/os.version)
   if [ "$ospgversion" == "debian" ]; then
-    ansible-playbook /opt/plexguide/menu/pg.yml --tags dockerdeb
+    ansible-playbook /opt/pgblitz/menu/pg.yml --tags dockerdeb
   else
-    ansible-playbook /opt/plexguide/menu/pg.yml --tags docker
+    ansible-playbook /opt/pgblitz/menu/pg.yml --tags docker
     # If Docker FAILED, Emergency Install
     file="/usr/bin/docker"
     if [ ! -e "$file" ]; then
@@ -441,19 +441,19 @@ tee <<-EOF
 ✅️  PASS: Server ID $typed Established
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
-  echo "$typed" > /var/plexguide/server.id
+  echo "$typed" > /var/pgblitz/server.id
   sleep 1
   fi
 }
 
 watchtower () {
 
-  file="/var/plexguide/watchtower.wcheck"
+  file="/var/pgblitz/watchtower.wcheck"
   if [ ! -e "$file" ]; then
-  echo "4" > /var/plexguide/watchtower.wcheck
+  echo "4" > /var/pgblitz/watchtower.wcheck
   fi
 
-  wcheck=$(cat "/var/plexguide/watchtower.wcheck")
+  wcheck=$(cat "/var/pgblitz/watchtower.wcheck")
     if [[ "$wcheck" -ge "1" && "$wcheck" -le "3" ]]; then
     wexit="1"
     else wexit=0; fi
@@ -478,17 +478,17 @@ EOF
   if [ "$typed" == "1" ]; then
     watchtowergen
     ansible-playbook /opt/coreapps/apps/watchtower.yml
-    echo "1" > /var/plexguide/watchtower.wcheck
+    echo "1" > /var/pgblitz/watchtower.wcheck
   elif [ "$typed" == "2" ]; then
     watchtowergen
     sed -i -e "/plex/d" /tmp/watchtower.set 1>/dev/null 2>&1
     sed -i -e "/emby/d" /tmp/watchtower.set 1>/dev/null 2>&1
     ansible-playbook /opt/coreapps/apps/watchtower.yml
-    echo "2" > /var/plexguide/watchtower.wcheck
+    echo "2" > /var/pgblitz/watchtower.wcheck
   elif [ "$typed" == "3" ]; then
     echo null > /tmp/watchtower.set
     ansible-playbook /opt/coreapps/apps/watchtower.yml
-    echo "3" > /var/plexguide/watchtower.wcheck
+    echo "3" > /var/pgblitz/watchtower.wcheck
   elif [[ "$typed" == "Z" || "$typed" == "z" ]]; then
     if [ "$wexit" == "0" ]; then
 tee <<-EOF
@@ -512,5 +512,5 @@ watchtowergen () {
   while read p; do
     echo -n $p >> /tmp/watchtower.set
     echo -n " " >> /tmp/watchtower.set
-  done </var/plexguide/app.list
+  done </var/pgblitz/app.list
 }

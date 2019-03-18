@@ -14,8 +14,8 @@ variable () {
 
 # For ZipLocations
 
-variable /var/plexguide/server.hd.path "/mnt"
-pgpath=$(cat /var/plexguide/server.hd.path)
+variable /var/pgblitz/server.hd.path "/mnt"
+pgpath=$(cat /var/pgblitz/server.hd.path)
 
 used=$(df -h $pgpath | tail -n +2 | awk '{print $3}')
 capacity=$(df -h $pgpath | tail -n +2 | awk '{print $2}')
@@ -151,7 +151,7 @@ sleep 2
 chown 1000:1000 "$typed"
 chmod 0775 "$typed"
 rm -rf "$typed/test"
-echo $typed > /var/plexguide/server.hd.path
+echo $typed > /var/pgblitz/server.hd.path
 break=off
 
 tee <<-EOF
@@ -162,8 +162,8 @@ tee <<-EOF
 EOF
 sleep 2
 
-ansible-playbook /opt/plexguide/menu/installer/main.yml
-bash /opt/plexguide/menu/dlpath/rebuild.sh
+ansible-playbook /opt/pgblitz/menu/installer/main.yml
+bash /opt/pgblitz/menu/dlpath/rebuild.sh
 
 tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -198,7 +198,7 @@ tee <<-EOF
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 sleep 3
-bash /opt/plexguide/menu/dlpath/dlpath.sh
+bash /opt/pgblitz/menu/dlpath/dlpath.sh
 exit
 fi
 

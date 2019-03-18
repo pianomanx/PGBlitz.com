@@ -7,7 +7,7 @@
 ################################################################################
 function gcheck {
 
-edition=$(cat /var/plexguide/pg.edition)
+edition=$(cat /var/pgblitz/pg.edition)
 if [ "$edition" == "PG Edition - GDrive" ] || [ "$edition" == "PG Edition - GCE Feed" ]; then
 gcheck=$(cat /opt/appdata/pgblitz/rclone.conf 2>/dev/null | grep 'gdrive' | head -n1 | cut -b1-8)
   if [ "$gcheck" != "[gdrive]" ]; then
@@ -23,7 +23,7 @@ function. GDrive configuration is required to move data!
 EOF
 read -n 1 -s -r -p "Press [ANY] Key to Continue "
 echo
-bash /opt/plexguide/menu/tools/tools.sh
+bash /opt/pgblitz/menu/tools/tools.sh
 exit
   fi
 else
@@ -44,7 +44,7 @@ Think you get the idea!
 EOF
 read -n 1 -s -r -p "Press [ANY] Key to Continue "
 echo
-bash /opt/plexguide/menu/tools/tools.sh
+bash /opt/pgblitz/menu/tools/tools.sh
 exit
 fi
 }
@@ -73,28 +73,28 @@ EOF
 read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
 
   if [ "$typed" == "1" ]; then
-  bash /opt/plexguide/menu/pgcloner/pgpatrol.sh
+  bash /opt/pgblitz/menu/pgcloner/pgpatrol.sh
   bash /opt/pgpatrol/pgpatrol.sh
 elif [ "$typed" == "2" ]; then
-  bash /opt/plexguide/menu/pgscan/pgscan.sh
+  bash /opt/pgblitz/menu/pgscan/pgscan.sh
 elif [ "$typed" == "3" ]; then
-  bash /opt/plexguide/menu/pgtrakt/pgtrakt.sh
+  bash /opt/pgblitz/menu/pgtrakt/pgtrakt.sh
 elif [ "$typed" == "4" ]; then
-  bash /opt/plexguide/menu/hetzner/pghetznerigpu.sh
+  bash /opt/pgblitz/menu/hetzner/pghetznerigpu.sh
 elif [ "$typed" == "5" ]; then
-  bash /opt/plexguide/menu/pgdnsswitcher/pgdnschanger.sh  
+  bash /opt/pgblitz/menu/pgdnsswitcher/pgdnschanger.sh  
 elif [ "$typed" == "6" ]; then
-  echo 'vpnserver' > /var/plexguide/type.choice && bash /opt/plexguide/menu/core/scripts/main.sh
+  echo 'vpnserver' > /var/pgblitz/type.choice && bash /opt/pgblitz/menu/core/scripts/main.sh
 elif [ "$typed" == "7" ]; then
-  bash /opt/plexguide/menu/network/network.sh
+  bash /opt/pgblitz/menu/network/network.sh
 elif [ "$typed" == "8" ]; then
-  bash /opt/plexguide/menu/tshoot/tshoot.sh
+  bash /opt/pgblitz/menu/tshoot/tshoot.sh
 elif [ "$typed" == "Z" ] || [ "$typed" == "z" ]; then
   exit
 else
-  bash /opt/plexguide/menu/tools/tools.sh
+  bash /opt/pgblitz/menu/tools/tools.sh
   exit
 fi
 
-bash /opt/plexguide/menu/tools/tools.sh
+bash /opt/pgblitz/menu/tools/tools.sh
 exit

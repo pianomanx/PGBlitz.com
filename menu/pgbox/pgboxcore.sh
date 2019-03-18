@@ -7,7 +7,7 @@
 ################################################################################
 
 # FUNCTIONS START ##############################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/pgblitz/menu/functions/functions.sh
 
 queued () {
 echo
@@ -27,28 +27,28 @@ else exists; fi
 
 cronexe () {
 croncheck=$(cat /opt/coreapps/apps/_cron.list | grep -c "\<$p\>")
-if [ "$croncheck" == "0" ]; then bash /opt/plexguide/menu/cron/cron.sh; fi
+if [ "$croncheck" == "0" ]; then bash /opt/pgblitz/menu/cron/cron.sh; fi
 }
 
 cronmass () {
 croncheck=$(cat /opt/coreapps/apps/_cron.list | grep -c "\<$p\>")
-if [ "$croncheck" == "0" ]; then bash /opt/plexguide/menu/cron/cron.sh; fi
+if [ "$croncheck" == "0" ]; then bash /opt/pgblitz/menu/cron/cron.sh; fi
 }
 
 initial () {
-  rm -rf /var/plexguide/pgbox.output 1>/dev/null 2>&1
-  rm -rf /var/plexguide/pgbox.buildup 1>/dev/null 2>&1
-  rm -rf /var/plexguide/program.temp 1>/dev/null 2>&1
-  rm -rf /var/plexguide/app.list 1>/dev/null 2>&1
-  touch /var/plexguide/pgbox.output
-  touch /var/plexguide/program.temp
-  touch /var/plexguide/app.list
-  touch /var/plexguide/pgbox.buildup
+  rm -rf /var/pgblitz/pgbox.output 1>/dev/null 2>&1
+  rm -rf /var/pgblitz/pgbox.buildup 1>/dev/null 2>&1
+  rm -rf /var/pgblitz/program.temp 1>/dev/null 2>&1
+  rm -rf /var/pgblitz/app.list 1>/dev/null 2>&1
+  touch /var/pgblitz/pgbox.output
+  touch /var/pgblitz/program.temp
+  touch /var/pgblitz/app.list
+  touch /var/pgblitz/pgbox.buildup
 
   mkdir -p /opt/coreapps
 
-  if [ "$boxversion" == "official" ]; then ansible-playbook /opt/plexguide/menu/pgbox/pgboxcore.yml
-  else ansible-playbook /opt/plexguide/menu/pgbox/pgbox_corepersonal.yml; fi
+  if [ "$boxversion" == "official" ]; then ansible-playbook /opt/pgblitz/menu/pgbox/pgboxcore.yml
+  else ansible-playbook /opt/pgblitz/menu/pgbox/pgbox_corepersonal.yml; fi
 
   echo ""
   echo "💬  Pulling Update Files - Please Wait"
@@ -65,55 +65,55 @@ question1 () {
 
   ### Remove Running Apps
   while read p; do
-    sed -i "/^$p\b/Id" /var/plexguide/app.list
-  done </var/plexguide/pgbox.running
+    sed -i "/^$p\b/Id" /var/pgblitz/app.list
+  done </var/pgblitz/pgbox.running
 
-  cp /var/plexguide/app.list /var/plexguide/app.list2
+  cp /var/pgblitz/app.list /var/pgblitz/app.list2
 
-  file="/var/plexguide/core.app"
+  file="/var/pgblitz/core.app"
   #if [ ! -e "$file" ]; then
     ls -la /opt/coreapps/apps | sed -e 's/.yml//g' \
-    | awk '{print $9}' | tail -n +4  > /var/plexguide/app.list
+    | awk '{print $9}' | tail -n +4  > /var/pgblitz/app.list
   while read p; do
     echo "" >> /opt/coreapps/apps/$p.yml
     echo "##PG-Core" >> /opt/coreapps/apps/$p.yml
 
     mkdir -p /opt/mycontainers
     touch /opt/appdata/pgblitz/rclone.conf
-  done </var/plexguide/app.list
-    touch /var/plexguide/core.app
+  done </var/pgblitz/app.list
+    touch /var/pgblitz/core.app
   #fi
 
 #bash /opt/coreapps/apps/_appsgen.sh
-docker ps | awk '{print $NF}' | tail -n +2 > /var/plexguide/pgbox.running
+docker ps | awk '{print $NF}' | tail -n +2 > /var/pgblitz/pgbox.running
 
 ### Remove Official Apps
 while read p; do
   # reminder, need one for custom apps
   baseline=$(cat /opt/coreapps/apps/$p.yml | grep "##PG-Core")
-  if [ "$baseline" == "" ]; then sed -i -e "/$p/d" /var/plexguide/app.list; fi
-done </var/plexguide/app.list
+  if [ "$baseline" == "" ]; then sed -i -e "/$p/d" /var/pgblitz/app.list; fi
+done </var/pgblitz/app.list
 
 ### Blank Out Temp List
-rm -rf /var/plexguide/program.temp && touch /var/plexguide/program.temp
+rm -rf /var/pgblitz/program.temp && touch /var/pgblitz/program.temp
 
 ### List Out Apps In Readable Order (One's Not Installed)
 num=0
-sed -i -e "/templates/d" /var/plexguide/app.list
-sed -i -e "/image/d" /var/plexguide/app.list
-sed -i -e "/_/d" /var/plexguide/app.list
+sed -i -e "/templates/d" /var/pgblitz/app.list
+sed -i -e "/image/d" /var/pgblitz/app.list
+sed -i -e "/_/d" /var/pgblitz/app.list
 while read p; do
-  echo -n $p >> /var/plexguide/program.temp
-  echo -n " " >> /var/plexguide/program.temp
+  echo -n $p >> /var/pgblitz/program.temp
+  echo -n " " >> /var/pgblitz/program.temp
   num=$[num+1]
   if [[ "$num" == "7" ]]; then
     num=0
-    echo " " >> /var/plexguide/program.temp
+    echo " " >> /var/pgblitz/program.temp
   fi
-done </var/plexguide/app.list
+done </var/pgblitz/app.list
 
-notrun=$(cat /var/plexguide/program.temp)
-buildup=$(cat /var/plexguide/pgbox.output)
+notrun=$(cat /var/pgblitz/program.temp)
+buildup=$(cat /var/pgblitz/pgbox.output)
 
 if [ "$buildup" == "" ]; then buildup="NONE"; fi
 tee <<-EOF
@@ -138,34 +138,34 @@ if [[ "$typed" == "deploy" ]]; then question2; fi
 
 if [ "$typed" == "exit" ]; then exit; fi
 
-current=$(cat /var/plexguide/pgbox.buildup | grep "\<$typed\>")
+current=$(cat /var/pgblitz/pgbox.buildup | grep "\<$typed\>")
 if [ "$current" != "" ]; then queued && question1; fi
 
-current=$(cat /var/plexguide/pgbox.running | grep "\<$typed\>")
+current=$(cat /var/pgblitz/pgbox.running | grep "\<$typed\>")
 if [ "$current" != "" ]; then exists && question1; fi
 
-current=$(cat /var/plexguide/program.temp | grep "\<$typed\>")
+current=$(cat /var/pgblitz/program.temp | grep "\<$typed\>")
 if [ "$current" == "" ]; then badinput1 && question1; fi
 
 part1
 }
 
 part1 () {
-echo "$typed" >> /var/plexguide/pgbox.buildup
+echo "$typed" >> /var/pgblitz/pgbox.buildup
 num=0
 
-touch /var/plexguide/pgbox.output && rm -rf /var/plexguide/pgbox.output
+touch /var/pgblitz/pgbox.output && rm -rf /var/pgblitz/pgbox.output
 
 while read p; do
-echo -n $p >> /var/plexguide/pgbox.output
-echo -n " " >> /var/plexguide/pgbox.output
+echo -n $p >> /var/pgblitz/pgbox.output
+echo -n " " >> /var/pgblitz/pgbox.output
 if [[ "$num" == 7 ]]; then
   num=0
-  echo " " >> /var/plexguide/pgbox.output
+  echo " " >> /var/pgblitz/pgbox.output
 fi
-done </var/plexguide/pgbox.buildup
+done </var/pgblitz/pgbox.buildup
 
-sed -i "/^$typed\b/Id" /var/plexguide/app.list
+sed -i "/^$typed\b/Id" /var/pgblitz/app.list
 
 question1
 }
@@ -185,15 +185,15 @@ while read p; do
 echo $p > /tmp/program_var
 
 bash /opt/coreapps/apps/image/_image.sh
-done </var/plexguide/pgbox.buildup
+done </var/pgblitz/pgbox.buildup
 
 # Cron Execution
-edition=$( cat /var/plexguide/pg.edition )
+edition=$( cat /var/pgblitz/pg.edition )
 if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
 else
-  croncount=$(sed -n '$=' /var/plexguide/pgbox.buildup)
-  echo "false" > /var/plexguide/cron.count
-  if [ "$croncount" -ge "2" ]; then bash /opt/plexguide/menu/cron/mass.sh; fi
+  croncount=$(sed -n '$=' /var/pgblitz/pgbox.buildup)
+  echo "false" > /var/pgblitz/cron.count
+  if [ "$croncount" -ge "2" ]; then bash /opt/pgblitz/menu/cron/mass.sh; fi
 fi
 
 
@@ -207,7 +207,7 @@ EOF
 
 sleep 2.5
 
-if [ "$p" == "plex" ]; then bash /opt/plexguide/menu/plex/plex.sh;
+if [ "$p" == "plex" ]; then bash /opt/pgblitz/menu/plex/plex.sh;
 elif [ "$p" == "nzbthrottle" ]; then nzbt; fi
 
 # Store Used Program
@@ -219,10 +219,10 @@ if [[ "$edition" == "PG Edition - HD Solo" ]]; then a=b
 else if [ "$croncount" -eq "1" ]; then cronexe; fi; fi
 
 # End Banner
-bash /opt/plexguide/menu/pgbox/endbanner.sh >> /tmp/output.info
+bash /opt/pgblitz/menu/pgbox/endbanner.sh >> /tmp/output.info
 
 sleep 2
-done </var/plexguide/pgbox.buildup
+done </var/pgblitz/pgbox.buildup
 echo "" >> /tmp/output.info
 cat /tmp/output.info
 final
@@ -230,8 +230,8 @@ final
 
 pinterface () {
 
-boxuser=$(cat /var/plexguide/boxcore.user)
-boxbranch=$(cat /var/plexguide/boxcore.branch)
+boxuser=$(cat /var/pgblitz/boxcore.user)
+boxbranch=$(cat /var/pgblitz/boxcore.branch)
 
 tee <<-EOF
 
@@ -264,8 +264,8 @@ but check the branch under your fork that is being pulled!
 EOF
         read -p 'Username | Press [ENTER]: ' boxuser < /dev/tty
         read -p 'Branch   | Press [ENTER]: ' boxbranch < /dev/tty
-        echo "$boxuser" > /var/plexguide/boxcore.user
-        echo "$boxbranch" > /var/plexguide/boxcore.branch
+        echo "$boxuser" > /var/pgblitz/boxcore.user
+        echo "$boxbranch" > /var/pgblitz/boxcore.branch
         pinterface ;;
     2 )
         existcheck=$(git ls-remote --exit-code -h "https://github.com/$boxuser/PGBlitz-Core" | grep "$boxbranch")
@@ -313,8 +313,8 @@ case $typed in
         initial
         question1 ;;
     2 )
-        variable /var/plexguide/boxcore.user "NOT-SET"
-        variable /var/plexguide/boxcore.branch "NOT-SET"
+        variable /var/pgblitz/boxcore.user "NOT-SET"
+        variable /var/pgblitz/boxcore.branch "NOT-SET"
         pinterface ;;
     z )
         exit ;;

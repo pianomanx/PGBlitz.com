@@ -25,19 +25,19 @@ variable () {
 
 readrcloneconfig () {
   touch /opt/appdata/pgblitz/rclone.conf
-  mkdir -p /var/plexguide/rclone/
+  mkdir -p /var/pgblitz/rclone/
 
   gdcheck=$(cat /opt/appdata/pgblitz/rclone.conf | grep gdrive)
-  if [ "$gdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/gdrive.status && gdstatus="good";
-  else echo "bad" > /var/plexguide/rclone/gdrive.status && gdstatus="bad"; fi
+  if [ "$gdcheck" != "" ]; then echo "good" > /var/pgblitz/rclone/gdrive.status && gdstatus="good";
+  else echo "bad" > /var/pgblitz/rclone/gdrive.status && gdstatus="bad"; fi
 
   gccheck=$(cat /opt/appdata/pgblitz/rclone.conf | grep "remote = gdrive:/encrypt")
-  if [ "$gccheck" != "" ]; then echo "good" > /var/plexguide/rclone/gcrypt.status && gcstatus="good";
-  else echo "bad" > /var/plexguide/rclone/gcrypt.status && gcstatus="bad"; fi
+  if [ "$gccheck" != "" ]; then echo "good" > /var/pgblitz/rclone/gcrypt.status && gcstatus="good";
+  else echo "bad" > /var/pgblitz/rclone/gcrypt.status && gcstatus="bad"; fi
 
   tdcheck=$(cat /opt/appdata/pgblitz/rclone.conf | grep tdrive)
-  if [ "$tdcheck" != "" ]; then echo "good" > /var/plexguide/rclone/tdrive.status && tdstatus="good"
-  else echo "bad" > /var/plexguide/rclone/tdrive.status && tdstatus="bad"; fi
+  if [ "$tdcheck" != "" ]; then echo "good" > /var/pgblitz/rclone/tdrive.status && tdstatus="good"
+  else echo "bad" > /var/pgblitz/rclone/tdrive.status && tdstatus="bad"; fi
 
 }
 
@@ -47,5 +47,5 @@ rcloneconfig () {
 
 keysprocessed () {
   mkdir -p /opt/appdata/pgblitz/keys/processed
-  ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/plexguide/project.keycount
+  ls -1 /opt/appdata/pgblitz/keys/processed | wc -l > /var/pgblitz/project.keycount
 }
