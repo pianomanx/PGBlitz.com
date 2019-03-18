@@ -10,7 +10,7 @@
 echo 'blitzgce' > /var/pgblitz/pgcloner.rolename
 echo 'BlitzGCE' > /var/pgblitz/pgcloner.roleproper
 echo 'BlitzGCE' > /var/pgblitz/pgcloner.projectname
-echo 'v8.5' > /var/pgblitz/pgcloner.projectversion
+echo 'v8.6' > /var/pgblitz/pgcloner.projectversion
 echo 'blitzgce.sh' > /var/pgblitz/pgcloner.startlink
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

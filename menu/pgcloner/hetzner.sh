@@ -10,7 +10,7 @@
 echo 'hetzner' > /var/pgblitz/pgcloner.rolename
 echo 'HCloud (Hetzner)' > /var/pgblitz/pgcloner.roleproper
 echo 'Hetzner' > /var/pgblitz/pgcloner.projectname
-echo 'v8.5' > /var/pgblitz/pgcloner.projectversion
+echo 'v8.6' > /var/pgblitz/pgcloner.projectversion
 echo 'hcloud.sh' > /var/pgblitz/pgcloner.startlink
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

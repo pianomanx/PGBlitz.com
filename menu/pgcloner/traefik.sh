@@ -10,7 +10,7 @@
 echo 'traefik' > /var/pgblitz/pgcloner.rolename
 echo 'Traefik' > /var/pgblitz/pgcloner.roleproper
 echo 'Traefik' > /var/pgblitz/pgcloner.projectname
-echo 'v8.5' > /var/pgblitz/pgcloner.projectversion
+echo 'v8.6' > /var/pgblitz/pgcloner.projectversion
 echo 'traefik.sh' > /var/pgblitz/pgcloner.startlink
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

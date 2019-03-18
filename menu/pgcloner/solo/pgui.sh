@@ -10,7 +10,7 @@
 echo 'pgui' > /var/pgblitz/pgcloner.rolename
 echo 'UI' > /var/pgblitz/pgcloner.roleproper
 echo 'BlitzUI' > /var/pgblitz/pgcloner.projectname
-echo 'v8.5' > /var/pgblitz/pgcloner.projectversion
+echo 'v8.6' > /var/pgblitz/pgcloner.projectversion
 
 ### START PROCESS
 ansible-playbook /opt/pgblitz/menu/pgcloner/core/primary.yml

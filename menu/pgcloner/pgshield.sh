@@ -10,7 +10,7 @@
 echo 'pgshield' > /var/pgblitz/pgcloner.rolename
 echo 'PGShield' > /var/pgblitz/pgcloner.roleproper
 echo 'PGShield' > /var/pgblitz/pgcloner.projectname
-echo 'v8.5.6' > /var/pgblitz/pgcloner.projectversion
+echo 'v8.6' > /var/pgblitz/pgcloner.projectversion
 echo 'pgshield.sh' > /var/pgblitz/pgcloner.startlink
 
 #━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
