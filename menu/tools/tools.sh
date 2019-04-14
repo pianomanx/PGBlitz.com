@@ -60,10 +60,11 @@ tee <<-EOF
 [2] PG Scan   [Not Ready]
 [3] PG Trakt
 [4] PG Hetzner iGPU / GPU HW-Transcode
-[5] PG DNS changer 
+[5] PG System Tweak
 [6] Personal VPN Service Installer
 [7] System & Network Auditor
 [8] TroubleShoot ~ PreInstaller
+
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -82,7 +83,7 @@ elif [ "$typed" == "3" ]; then
 elif [ "$typed" == "4" ]; then
   bash /opt/plexguide/menu/hetzner/pghetznerigpu.sh
 elif [ "$typed" == "5" ]; then
-  bash /opt/plexguide/menu/pgdnsswitcher/pgdnschanger.sh  
+  bash /opt/plexguide/menu/nttweak/nttweak.sh
 elif [ "$typed" == "6" ]; then
   echo 'vpnserver' > /var/plexguide/type.choice && bash /opt/plexguide/menu/core/scripts/main.sh
 elif [ "$typed" == "7" ]; then
