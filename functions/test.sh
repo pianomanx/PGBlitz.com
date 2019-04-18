@@ -5,6 +5,6 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/plexguide/functions/core.sh
 
 pgstore apple tree
