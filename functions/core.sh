@@ -15,7 +15,7 @@ if [[ ! -e "${mainfile}" || $(cat $mainfile) == "" ]]; then
   echo "}" >> "$mainfile"
 fi
 
-valuecheck=$(cat ${mainfile} | jq ' ."$1"')
+valuecheck=$(cat ${mainfile} | jq " ."$1"")
 if [[ "$valuecheck" == "null" ]]; then
   jq " ."$(echo $1)" = "$2" " ${mainfile}|sponge ${mainfile}; fi
 
