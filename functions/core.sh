@@ -18,5 +18,5 @@ varvar="5"
 
 valuecheck=$(cat ${mainfile} | jq ' ."${varstore}"')
 if [[ "$valuecheck" == "null" ]]; then
-  jq ' .$varstore = varvar ' ${mainfile}|sponge ${mainfile}
+  jq " ."$(echo $varstore)" = "$varvar" " ${mainfile}|sponge ${mainfile}
 fi
