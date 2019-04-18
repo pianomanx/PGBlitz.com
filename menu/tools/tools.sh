@@ -64,7 +64,6 @@ tee <<-EOF
 [6] Personal VPN Service Installer
 [7] System & Network Auditor
 [8] TroubleShoot ~ PreInstaller
-
 [Z] Exit
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
