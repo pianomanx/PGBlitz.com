@@ -1,3 +1,4 @@
+##### WANT TO HELP? CLICK THE ★ (STAR LOGO) in the Upper-Right! 
 <p align="center">
   <a href="https://pgblitz.com/forums" target="_blank"><img src="https://pgblitz.com/wikipics/logo-forums.png" width="160"/>   
   <a href="https://github.com/PGBlitz/PGBlitz.com/wiki" target="_blank"><img src="https://pgblitz.com/wikipics/logo-wiki.png" width="160"/>
@@ -7,9 +8,9 @@
 
 * 📂 [**[Click Here]**](https://goo.gl/7NR3Da) - Google G-Suite (Unlimited Hard Drive Space & Storage)
 * 📂 [**[Click Here]**](https://controlpanel.newshosting.com/signup/index.php?promo=partners&a_aid=5a65169240efd&a_bid=5ecfe99b) - Top Performance NewsHost! - Blitz Members Receive a 58% Discount
-
 ----
-
+### **Reference Shortcut -** http://wiki.pgblitz.com | Discord ( !wiki )
+----
 _**Table of Contents**_
 
 1. [PG YouTube](#1-pg-youtube)
@@ -24,18 +25,17 @@ _**Table of Contents**_
 
 ## 1. PG YouTube
 
-<p align="center"><kbd>
-<a href="http://www.youtube.com/watch?v=FkQ5sOcJGjs"><img src="https://github.com/PGBlitz/Assets/blob/master/ycovers/introv4.png?raw=true" width="600"/></kbd></p>
+<p align="center"><kbd><a href="https://youtu.be/joqL_zjl0pE" /a><img src="https://github.com/PGBlitz/Assets/blob/master/ycovers/mainintro.png" width="400"></kbd></p>
 <p align="center"><b>PGBlitz Introduction Video</b></p>
 
-<p align="center"><kbd>
-<a href="https://youtu.be/s3hrY2x1a2M"><img src="https://pgblitz.com/press/wp-content/uploads/2019/02/youtube-install-v9-2-1024x578.png" width="600"/></kbd></p>
-<p align="center">
+<p align="center"><kbd><a href="https://youtu.be/8lotdbpsrUE" /a><img src="https://github.com/PGBlitz/Assets/blob/master/ycovers/introv10.png" width="400"></kbd></p>
+<p align="center"><b>PGBlitz Installation Video</b></p>
 
 [**[Click Here]**](https://pgblitz.com/threads/plexguide-install-instructions.243/) for installation instructions to start the process
 
 ## 2. Project Statement
-<p align="center"><kbd><img src="https://pgblitz.com/press/wp-content/uploads/2019/02/explode.gif" width="600""></kbd></p>
+
+<p align="center"><kbd><img src="https://pgblitz.com/press/wp-content/uploads/2019/02/explode.gif" width="400"></kbd></p>
 <p align="center"><b>Manage PGBlitz - AnyTime, Anywhere!</b></p>
 
 **Project Statement:** PGBlitz is an all-in-one media solution that deploys a Media Server through the use of your Local HD or Google Drive; serving as an unlimited back-end storage. PGBlitz utilizes Ansible and Docker to streamline your Media Server, while deploying multiple tools for your Server Operations.
@@ -51,7 +51,7 @@ _**Table of Contents**_
 1. Deploys with a simple installer and a GUI like interface (commands do not have to be typed out)
 
 ## 4. Testimonials
-<p align="center"><kbd><img src="https://pgblitz.com/wikipics/pg-assistyou.gif" width="600""></kbd></p>
+<p align="center"><kbd><img src="https://pgblitz.com/wikipics/pg-assistyou.gif" width="400""></kbd></p>
 
 [**Dexxa:**](https://pgblitz.com/threads/cant-install-plex-guide.1005/#post-5724) Cant believe how it easy it was to install Plex and link Plex to Google Drive, when i just knew how to install Plex on its on, i tried many ways to mount Google Drive to my Plex and couldn't get it to work, but this did it for me in minutes, I'll be using this script from now on, on all my servers, thank you.
 
