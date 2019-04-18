@@ -5,7 +5,7 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-source /opt/plexguide/menu/functions/functions.sh
+source /opt/plexguide/functions/core.sh
 
 updateprime() {
   abc="/var/plexguide"
@@ -39,6 +39,27 @@ updateprime() {
   ospgversion=$(cat /etc/*-release | grep Debian | grep 9)
   if [ "$ospgversion" != "" ]; then echo "debian"> ${abc}/os.version;
   else echo "ubuntu" > ${abc}/os.version; fi
+
+  pgstore "1" "install.merger"
+  pgstore "1" "install.python"
+  pgstore "1" "install.apt"
+  pgstore "1" "install.preinstall"
+  pgstore "1" "install.folders"
+  pgstore "1" "install.docker"
+  pgstore "1" "install.server"
+  pgstore "1" "install.serverid"
+  pgstore "1" "install.dependency"
+  pgstore "1" "install.dockerstart"
+  pgstore "1" "install.motd"
+  pgstore "1" "install.alias"
+  pgstore "1" "install.cleaner"
+  pgstore "1" "install.gcloud"
+  pgstore "1" "install.hetzner"
+  pgstore "1" "install.amazonaws"
+  pgstore "1" "install.watchtower"
+  pgstore "1" "install.installer"
+  pgstore "1" "install.prune"
+  pgstore "1" "install.mountcheck"
 
   echo "2" > ${abc}/pg.mergerinstall
   echo "52" > ${abc}/pg.pythonstart
