@@ -5,18 +5,22 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
-pgstore() {
+pgstore () {
 
-mainfile="/opt/appdata/pgblitz/blitz.json"
+maindir="/var/plexguide/"
+if [[ ! -e "${maindir}/${1}" ]]; then touch "${maindir}/${1}"; fi
+echo "${2}" > "${maindir}/${1}"
+}
 
-if [[ ! -e "${mainfile}" || $(cat $mainfile) == "" ]]; then
-  echo "{" > "$mainfile"
-  echo "" >> "$mainfile"
-  echo "}" >> "$mainfile"
-fi
+maindir="/var/plexguide/"
+if [[ ! -e "${maindir}${1}" ]]; then touch "${maindir}${1}"; fi
+echo "${2}" > "${maindir}${1}"
+}
 
-valuecheck=$(cat ${mainfile} | jq " ."$1"")
-if [[ "$valuecheck" == "null" ]]; then
-  jq " ."$(echo $1)" = "$2" " ${mainfile}|sponge ${mainfile}; fi
+pgrecall () {
 
+}
+
+userandgroup () {
+  
 }
