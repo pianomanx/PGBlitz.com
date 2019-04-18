@@ -5,6 +5,8 @@
 # URL:        https://pgblitz.com - http://github.pgblitz.com
 # GNU:        General Public License v3.0
 ################################################################################
+pgstore() {
+
 mainfile="/opt/appdata/pgblitz/blitz.json"
 
 if [[ ! -e "${mainfile}" || $(cat $mainfile) == "" ]]; then
@@ -13,10 +15,8 @@ if [[ ! -e "${mainfile}" || $(cat $mainfile) == "" ]]; then
   echo "}" >> "$mainfile"
 fi
 
-varstore="filler"
-varvar="5"
-
-valuecheck=$(cat ${mainfile} | jq ' ."${varstore}"')
+valuecheck=$(cat ${mainfile} | jq ' ."$1"')
 if [[ "$valuecheck" == "null" ]]; then
-  jq " ."$(echo $varstore)" = "$varvar" " ${mainfile}|sponge ${mainfile}
-fi
+  jq " ."$(echo $1)" = "$2" " ${mainfile}|sponge ${mainfile}; fi
+
+}
