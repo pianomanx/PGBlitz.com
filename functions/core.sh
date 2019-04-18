@@ -7,7 +7,7 @@
 ################################################################################
 pgstore () {
 
-maindir="/var/plexguide/"
+maindir="/home/$blitzuser/var"
 if [[ ! -e "${maindir}/${1}" ]]; then touch "${maindir}/${1}"; fi
 echo "${2}" > "${maindir}/${1}"
 }
@@ -19,8 +19,4 @@ echo "${2}" > "${maindir}${1}"
 
 pgrecall () {
 
-}
-
-userandgroup () {
-  
 }
