@@ -10,27 +10,27 @@ source /opt/pgblitz/functions/easy.sh
 
 easyinstall () {
 
+# menu interface for our special users :D
 tee <<-EOF
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 📂 Blitz Fast Install ~ Welcome to PGBlitz!
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-💬 NOTE: Visit the settings interface if you need to make changes!
+💬 NOTE: Visiting Settings to Make Future Changes!
 
 1 - YES: Fast Install
-2 - NO : Go through the Standard Process
+2 - NO : Standard Process
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 EOF
 
 read -p 'Type a Number | Press [ENTER]: ' typed < /dev/tty
 
 if [[ "$typed" == "1" ]]; then
-  # presetting variables then going through the process to rapid install
-
+  # presetting a variable to hasten the install process
+  easy="on"
 elif [[ "$typed" == "2" ]]; then
-  # exiting due to going through the standard process
-  exit
+  # nothing happens because easy by default is off
 else easyinstall; fi
-
+  # user will naturally exit this interface once a change is made
 }
