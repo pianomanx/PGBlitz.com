@@ -1,4 +1,4 @@
-PGBlitz.com (C) 2018
+PGBlitz.com (C) 2018 *RIP*
 
  GNU GENERAL PUBLIC LICENSE
  Copyright (C) 2007 Free Software Foundation, Inc. <http://fsf.org/>
